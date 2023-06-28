@@ -4,9 +4,10 @@ Command: npx gltfjsx@6.2.4 ../../public/models/FloorRounded.glb -t
 */
 
 import * as THREE from 'three'
-import React from 'react'
+import React, {useState} from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import { Illustration } from './Illustration'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -53,12 +54,19 @@ export function RoomCell(props: propsRoomCell) {
     materialPared = props.materialPared
   }
 
+  const [texture, setTexture] = useState('textures/2.jpg')
   return (
     <group {...props.groupProps} dispose={null} >
       <mesh  geometry={nodes.Suelo.geometry} material={materialSuelo} position={[0, 1.3, 0]}  />
       {props.type != CellType.floor? 
-        <mesh  geometry={nodes.Pared.geometry} material={materialPared} position={[0, 1.3, 0]}  /> : 
-        null }
+        <>
+          <mesh  geometry={nodes.Pared.geometry} material={materialPared} position={[0, 1.3, 0]}  />
+          <Illustration meshProps={ {position: [-0.9999,1.3,0], rotation: [0,Math.PI/2,0]} } imgUrl={'textures/1.jpg'}></Illustration>
+        </> : null }
+        {props.type == CellType.corner? 
+        <Illustration meshProps={ {position: [0,1.3,-0.9999], onClick: ( (e) => {setTexture('textures/1.jpg') })  } } imgUrl={texture}></Illustration>
+        : null}
+        
     </group>
   )
 }

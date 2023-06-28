@@ -10,7 +10,6 @@ interface IllustrationProps{
   meshProps?: JSX.IntrinsicElements['mesh'];
   imgUrl?: string
   maxSize?: number
-
 }
 
 export function Illustration(props: IllustrationProps ) {

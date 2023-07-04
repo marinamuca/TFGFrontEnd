@@ -1,9 +1,10 @@
 
 import * as THREE from 'three'
-import React from 'react'
+import React, { useState } from 'react'
 import { Euler, Vector3 } from '@react-three/fiber';
 import { RoomCell, CellType, EdgeType } from './RoomCell';
-;
+import {HexColorPicker} from "react-colorful";
+import {proxy, useSnapshot} from "valtio"
 
 interface roomProps{
     rows: number;
@@ -46,37 +47,54 @@ function edgeRotation(i: number, j: number, rows: number, cols: number){
     return rotation
 }
 
+const state = proxy({
+    showPicker: false,
+    color: "#ffffff"
+  })
+
 export function Room(props: roomProps) {
     let roomComps = []
     const floorWidth = 2
+
+    const snap = useSnapshot(state);
+    let material = new THREE.MeshStandardMaterial()
+    material.color = new THREE.Color(snap.color);
 
     for (let i = 0; i < props.rows; i++) {
         for (let j = 0; j < props.cols; j++) {
             let position = [0+i*floorWidth,0,0+j*floorWidth] as Vector3
             let rotation = [0,0,0] as Euler
-            let material = new THREE.MeshStandardMaterial()
             let cellType = CellType.floor
             let edgeType = EdgeType.rounded
 
             if( checkCorner(i, j, props.rows, props.cols)){ 
                 // CORNER
-                material.color = new THREE.Color(0x00ff00)  
                 cellType = CellType.corner
                 rotation = cornerRotation(i, j, props.rows, props.cols)
             } else if (checkEdge(i, j, props.rows, props.cols)) {
                 // EDGE
-                material.color = new THREE.Color(0xff00ff)  
                 cellType = CellType.wall
                 rotation = edgeRotation(i, j, props.rows, props.cols)
             } //INTERIOR
-            roomComps.push(<RoomCell    materialSuelo={material} materialPared={material} 
+            roomComps.push(<RoomCell    materialSuelo={material} materialPared={material}
                                         type={cellType} edgeType={edgeType} 
-                                        groupProps={{position: position, rotation: rotation}} />)   
+                                        groupProps={{   position: position, rotation: rotation, 
+                                                        onClick: ((e) => {state.showPicker = !snap.showPicker}) }} />)   
         }
     }
+
     return (
-        <>
+        <group>
             {...roomComps}
-        </>
+        </group>
+    )
+}
+
+export function ColorPicker() {
+    const snap = useSnapshot(state)
+    return(
+        <div style={{display: snap.showPicker? "block":"none"}}>
+            <HexColorPicker className='picker' color = {snap.color} onChange={(color) => (state.color = color)}/>
+        </div>
     )
 }

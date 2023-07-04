@@ -9,7 +9,6 @@ import { GLTF } from 'three-stdlib'
 import {proxy, useSnapshot} from "valtio"
 import { useState } from 'react'
 import {HexColorPicker} from "react-colorful"
-import { ThreeElements } from '@react-three/fiber'
 import { MeshStandardMaterial } from 'three'
 
 const state = proxy({

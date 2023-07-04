@@ -4,7 +4,7 @@ import {Box, Picker} from "../components/Box";
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Wall } from '../components/Wall';
 import { Illustration } from '../components/Illustration';
-import { Room } from "../components/Room";
+import { ColorPicker, Room } from "../components/Room";
 
 const GltfScene = () => {
     const [texture, setTexture] = useState('textures/1.jpg')
@@ -22,6 +22,7 @@ const GltfScene = () => {
                 <OrbitControls/>
                 <spotLight intensity={0.3} position={[5,20,20]}/>
             </Canvas>
+            <ColorPicker/>
         </>
     )
 }

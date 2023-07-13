@@ -1,34 +1,69 @@
-.App {
-  height: 100vh;
-  /* overflow: hidden; */
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 215 20.2% 65.1%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  body{
+    box-sizing: content-box;
+    /* display: flex; */
+    justify-content: center;
+    /* min-width: 50%;
+    max-width: 100%; */
+    margin: 0;
+  }
+  
+  h1 {
+    position: absolute;
+    top: 43px;
+    left: 140px;
+    padding: 0;
+    margin: 40px;
+    font-size: 5em;
+    font-weight: 600;
+    line-height: 0.7em;
+    letter-spacing: -4px;
+    color: #272730;
+  }
 
-body{
-  box-sizing: content-box;
-  /* display: flex; */
-  justify-content: center;
-  /* min-width: 50%;
-  max-width: 100%; */
-  margin: 0;
-}
+  .picker {
+    position: absolute !important;
+    top: 74px;
+    left: 70px;
+    width: 90px !important;
+    height: 90px !important;
+  }
 
-h1 {
-  position: absolute;
-  top: 43px;
-  left: 140px;
-  padding: 0;
-  margin: 40px;
-  font-size: 5em;
-  font-weight: 600;
-  line-height: 0.7em;
-  letter-spacing: -4px;
-  color: #272730;
-}
-
-.picker {
-  position: absolute !important;
-  top: 74px;
-  left: 70px;
-  width: 90px !important;
-  height: 90px !important;
 }

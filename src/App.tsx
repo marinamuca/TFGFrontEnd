@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import RoomScene from "./pages/scenes/RoomScene";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import NewExhibitionHome from "./pages/NewExhibition";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -16,16 +18,18 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/Galaxy' element={<Galaxy />}></Route>
-            <Route path='/GltfScene' element={<RoomScene />}></Route>
-            <Route path='/new/exhibition' element={<NewExhibitionHome />}></Route>
-          </Routes>
-        </Router>
-      </div>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="App">
+          <Router>
+            <Routes>
+              <Route path='/' element={<Home />}></Route>
+              <Route path='/Galaxy' element={<Galaxy />}></Route>
+              <Route path='/GltfScene' element={<RoomScene />}></Route>
+              <Route path='/new/exhibition' element={<NewExhibitionHome />}></Route>
+            </Routes>
+          </Router>
+        </div>
+      </LocalizationProvider>
     </Provider>
   )
 }

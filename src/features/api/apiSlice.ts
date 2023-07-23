@@ -4,19 +4,30 @@ import type { Exhibition } from '../types'
 
 export const apiSlice = createApi({
   reducerPath: "API_TFG",
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/' }),
   endpoints: (builder) => ({
     getExhibitions: builder.query({
-      query: () => `exhibitions`,
+      query: () => `exhibition/`,
     }),
     createExhibitions: builder.mutation({
         query: (body) => ({
-          url: `exhibitions`,
+          url: `exhibition/`,
           method: 'POST',
           body,
         })
     }),
+    getIllustrations: builder.query({
+      query: () => `illustration/`,
+    }),
+    createIllustration: builder.mutation({
+        query: (body) => ({
+          url: `illustration/`,
+          method: 'POST',
+          body: body,
+          formData: true
+        })
+    })
   }),
 });
 
-export const { useGetExhibitionsQuery, useCreateExhibitionsMutation } = apiSlice;
+export const { useGetExhibitionsQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery } = apiSlice;

@@ -34,7 +34,7 @@ const ExhibitionsComponent = () => {
             <a className="btn btn-outline-primary" onClick={(e) => {onClickPost()}}>
                 Post Exhibition
             </a>
-            {exhibitions.map((exhibition: any) => (
+            {exhibitions?.map((exhibition: any) => (
                 <div key={exhibition.id}>
                     <h3>{exhibition.name}</h3>
                     <p>{exhibition.theme}</p>

@@ -1,5 +1,5 @@
 import { skipToken } from '@reduxjs/toolkit/dist/query';
-import { useGetExhibitionsQuery, apiSlice, useCreateExhibitionsMutation } from '../features/api/apiSlice';
+import { useGetExhibitionsQuery, apiSlice, useCreateExhibitionsMutation } from '../../features/api/apiSlice';
 
 const ExhibitionsComponent = () => {
     // const {data: exhibitions = [], error, isLoading, isFetching} = useGetExhibitionsQuery(null)

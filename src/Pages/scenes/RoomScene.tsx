@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import {Picker} from "../../components/Box";
+import {Picker} from "../../components/test/Box";
 import { OrbitControls, Environment } from '@react-three/drei';
 import { ColorPicker, Room } from "../../components/Room";
 

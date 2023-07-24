@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@mui/material/Button';
-import Exhibitions from '../components/Exhibitions'
+import Exhibitions from '../components/test/Exhibitions'
 import ModalButton from '../components/ModalButton'
 import NewExhibitionForm from './NewExhibition';
 import NewIllustrarionForm from '../pages/NewIllustrationForm';

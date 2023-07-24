@@ -6,28 +6,33 @@ import { FormControl } from '@mui/material';
 import { useCreateIllustrationMutation } from '../features/api/apiSlice';
 import { Illustration } from '../features/types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Dayjs } from 'dayjs';
+import FileUpload from '../components/FileUpload';
+
 
 
 const NewIllustrationForm = () => {
-    const [addIllustration, response] = useCreateIllustrationMutation()
+    const [sendCreateIllustration, response] = useCreateIllustrationMutation()
 
     const [illustration, setIllustration] = useState<Illustration>({
         title: "",
         description: "",
         image: null,
-        date: "2023-03-05"
+        date: "",
+        exhibition: "61"
     });
 
     function handleSubmit(event: any) {
         event.preventDefault();
+
         let formData = new FormData();
         formData.append('title', illustration.title);
         formData.append('description', illustration.description);
         formData.append('date_painted', illustration.date);
-        formData.append('image', illustration.image as File, illustration.image!.name);
-        formData.append('exhibition', 61);
+        formData.append('image', illustration.image as File);
+        formData.append('exhibition', illustration.exhibition);
 
-        addIllustration(formData);
+        sendCreateIllustration(formData);
     }
 
     // if (response.error) {
@@ -36,12 +41,13 @@ const NewIllustrationForm = () => {
 
     return (
         <FormControl sx={{ m: 3 }}>
-            <TextField size='small' label="Nombre de la Sala" sx={{ mb: 3 }} value={illustration.title} onChange={(e) => { setIllustration({ ...illustration, title: e.target.value }) }} fullWidth></TextField>
-            <TextField size='small' label="Temática de la Sala" sx={{ mb: 3 }} value={illustration.description} onChange={(e) => { setIllustration({ ...illustration, description: e.target.value }) }} fullWidth></TextField>
-            {/* <TextField size='small' placeholder="Ancho de la Sala" label="Ancho" sx={{mb: 3}} value={illustration.date} onChange={(e) => {setIllustration({...illustration, date: e.target.value })}} fullWidth></TextField> */}
-            {/* <TextField size='small' placeholder="Largo de la Sala" label="Largo" sx={{mb: 3}} value={illustration.image} onChange={(e) => {setIllustration({...illustration, image: e.target.value })}} fullWidth></TextField> */}
-            <DatePicker label="Fecha de realización"></DatePicker>
-            <input type='file' accept="image/png, image/jpeg, image/jpg" onChange={(e) => { setIllustration({ ...illustration, image: e.target.files![0] }) }} ></input>
+            <TextField size='small' label="Titulo de la ilustración" sx={{ mb: 3 }} value={illustration.title} onChange={(e) => { setIllustration({ ...illustration, title: e.target.value }) }} fullWidth></TextField>
+            <TextField size='small' label="Descripción de la ilustración" sx={{ mb: 3 }} value={illustration.description} onChange={(e) => { setIllustration({ ...illustration, description: e.target.value }) }} fullWidth></TextField>
+    
+            <DatePicker sx={{ mb: 3 }} label="Fecha de realización" onChange={(e: Dayjs | null) => {setIllustration({...illustration, date: e!.format('YYYY-MM-DD')})}}></DatePicker>
+         
+            <FileUpload file={illustration.image} accept="image/png, image/jpeg, image/jpg" onChange={(e) => { setIllustration({ ...illustration, image: (e.target as HTMLInputElement).files![0] }) }}></FileUpload>
+
             <Button variant='contained' type='submit' onClick={handleSubmit}>Crear</Button>
         </FormControl>
 

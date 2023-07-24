@@ -24,14 +24,13 @@ const NewExhibitionForm = () => {
     }
 
     return (
-        <FormControl sx={{m: 3}}>
-            <TextField size='small' placeholder="Nombre de la Sala" label="Nombre" sx={{mb: 3}} value={exhibition.name} onChange={(e) => {setExhibition({...exhibition, name: e.target.value })}} fullWidth></TextField>
-            <TextField size='small' placeholder="Temática de la Sala" label="Tema" sx={{mb: 3}} value={exhibition.theme} onChange={(e) => {setExhibition({...exhibition, theme: e.target.value })}} fullWidth></TextField>
-            <TextField size='small' placeholder="Ancho de la Sala" label="Ancho" sx={{mb: 3}} value={exhibition.room_width} onChange={(e) => {setExhibition({...exhibition, room_width: e.target.value })}} fullWidth></TextField>
-            <TextField size='small' placeholder="Largo de la Sala" label="Largo" sx={{mb: 3}} value={exhibition.room_height} onChange={(e) => {setExhibition({...exhibition, room_height: e.target.value })}} fullWidth></TextField>
+        <FormControl sx={{m: 3, width: 225}}>
+            <TextField size='small' label="Nombre de la Exposición" sx={{mb: 3}} value={exhibition.name} onChange={(e) => {setExhibition({...exhibition, name: e.target.value })}} fullWidth></TextField>
+            <TextField size='small' label="Temática de la Exposición" sx={{mb: 3}} value={exhibition.theme} onChange={(e) => {setExhibition({...exhibition, theme: e.target.value })}} fullWidth></TextField>
+            <TextField size='small' label="Ancho de la Sala 3D" sx={{mb: 3}} value={exhibition.room_width} onChange={(e) => {setExhibition({...exhibition, room_width: e.target.value })}} fullWidth></TextField>
+            <TextField size='small' label="Largo de la Sala 3D" sx={{mb: 3}} value={exhibition.room_height} onChange={(e) => {setExhibition({...exhibition, room_height: e.target.value })}} fullWidth></TextField>
             <Button variant='contained' type='submit' onClick={handleSubmit}>Crear</Button>
         </FormControl>
-      
     )
 }
 

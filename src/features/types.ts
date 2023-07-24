@@ -10,5 +10,6 @@ export interface Illustration {
   title: string,
   description: string,
   date: string,
-  image: File | null
+  image: File | null,
+  exhibition: string
 }

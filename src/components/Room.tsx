@@ -5,10 +5,15 @@ import { Euler, Vector3 } from '@react-three/fiber';
 import { RoomCell, CellType, EdgeType } from './RoomCell';
 import {HexColorPicker} from "react-colorful";
 import {proxy, useSnapshot} from "valtio"
+import { Frame } from '../features/types';
+import { useAppDispatch } from '../hooks/appHooks';
+import { openModal, setContent, setTitle } from '../features/modalSlice';
+import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 interface roomProps{
     rows: number;
     cols: number;
+    illustrations: any;
     materialSuelo?: THREE.Material;
     materialPared?: THREE.Material;
 }
@@ -47,18 +52,46 @@ function edgeRotation(i: number, j: number, rows: number, cols: number){
     return rotation
 }
 
+function placeFrame( position: number, illustrations: any ){
+    let frame = {} as Frame;
+    frame.position = position
+    frame.image = ""
+
+    if(illustrations[0] && illustrations[0].position == position){
+        frame.image = illustrations[0].image
+        illustrations.shift();
+    }
+    
+    return frame
+}
+
 const state = proxy({
     showPicker: false,
     color: "#ffffff"
   })
 
 export function Room(props: roomProps) {
-    let roomComps = []
-    const floorWidth = 2
+    let roomCells = []
+    const floorWidth = 2 // TODO: TURN INTO GLOBAL CONSTANT
+
+    let placed_illustrations = props.illustrations.filter( (illustration: any) => illustration.position > -1 )
 
     const snap = useSnapshot(state);
     let material = new THREE.MeshStandardMaterial()
     material.color = new THREE.Color(snap.color);
+
+    let frame_pos = -1; 
+
+    const dispatch = useAppDispatch();
+    const handleFrameClick = (position: number) => {
+        dispatch(openModal())
+        dispatch(setTitle("Añadir ilustracion"))
+        dispatch(
+          setContent(
+            <></>
+          )
+        );
+    }
 
     for (let i = 0; i < props.rows; i++) {
         for (let j = 0; j < props.cols; j++) {
@@ -66,26 +99,36 @@ export function Room(props: roomProps) {
             let rotation = [0,0,0] as Euler
             let cellType = CellType.floor
             let edgeType = EdgeType.rounded
+            let frames = [] as Frame[];
 
             if( checkCorner(i, j, props.rows, props.cols)){ 
                 // CORNER
                 cellType = CellType.corner
                 rotation = cornerRotation(i, j, props.rows, props.cols)
+
+                frame_pos += 2;    
+                frames.push(placeFrame(frame_pos - 1 , placed_illustrations))
+                frames.push(placeFrame(frame_pos, placed_illustrations))
             } else if (checkEdge(i, j, props.rows, props.cols)) {
                 // EDGE
                 cellType = CellType.wall
                 rotation = edgeRotation(i, j, props.rows, props.cols)
+
+                frame_pos++;
+                frames.push(placeFrame(frame_pos, placed_illustrations))
             } //INTERIOR
-            roomComps.push(<RoomCell    materialSuelo={material} materialPared={material}
+            roomCells.push(<RoomCell    materialSuelo={material} materialPared={material}
                                         type={cellType} edgeType={edgeType} 
                                         groupProps={{   position: position, rotation: rotation, 
-                                                        onClick: ((e) => {state.showPicker = !snap.showPicker}) }} />)   
+                                                        onClick: ((e) => {state.showPicker = !snap.showPicker}) }}
+                                        handleFrameClick={handleFrameClick}
+                                        frames={frames}/>)   
         }
     }
 
     return (
         <group>
-            {...roomComps}
+            {...roomCells}
         </group>
     )
 }

@@ -3,7 +3,7 @@ export interface Exhibition {
   name: string;
   theme: string;
   room_width: string;
-  room_height: string;
+  room_length: string;
 }
 
 export interface Illustration {
@@ -11,5 +11,11 @@ export interface Illustration {
   description: string,
   date: string,
   image: File | null,
-  exhibition: string
+  exhibition: string,
+  position: number
+}
+
+export interface Frame {
+  position: number,
+  image: string,
 }

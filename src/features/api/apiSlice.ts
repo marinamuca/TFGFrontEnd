@@ -9,6 +9,9 @@ export const apiSlice = createApi({
     getExhibitions: builder.query({
       query: () => `exhibition/`,
     }),
+    getExhibitionByID: builder.query({
+      query: (id) => `exhibition/${id}/`,
+    }),
     createExhibitions: builder.mutation({
         query: (body) => ({
           url: `exhibition/`,
@@ -30,4 +33,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetExhibitionsQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery } = apiSlice;
+export const { useGetExhibitionsQuery,  useGetExhibitionByIDQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery } = apiSlice;

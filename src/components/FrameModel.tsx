@@ -6,13 +6,13 @@ Command: npx gltfjsx@6.2.3 -t ../blenderModels/box_comp.glb
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three'
 
-interface IllustrationProps{
+interface FrameModelProps{
   meshProps?: JSX.IntrinsicElements['mesh'];
   imgUrl?: string
   maxSize?: number
 }
 
-export function Illustration(props: IllustrationProps ) {
+export function FrameModel(props: FrameModelProps ) {
   let texture 
   let planeHeight = props.maxSize || 1
   let planeWidth = planeHeight / 2

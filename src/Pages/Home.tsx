@@ -1,29 +1,46 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 import Exhibitions from '../components/test/Exhibitions'
-import ModalButton from '../components/ModalButton'
-import NewExhibitionForm from './NewExhibition';
-import NewIllustrarionForm from '../pages/NewIllustrationForm';
+import NewExhibitionForm from './Exhibition/NewExhibition';
+import NewIllustrarionForm from './Illustration/NewIllustrationForm';
+import ListExhibitions from './Exhibition/ListExhibitions';
+import { Container } from '@mui/material';
+import { useAppDispatch } from '../hooks/appHooks';  
+import { openModal, setContent, setTitle } from '../features/modalSlice';
 
 
 const Home = () => {
+    const dispatch = useAppDispatch();
     const modalContent = <NewExhibitionForm/>
-    const modalillustration = <NewIllustrarionForm/>
+    const modalillustration = <NewIllustrarionForm id_exhibition={"61"}/>
+
+    const handleCreateExhibitionClick = () => {
+        dispatch(openModal());
+        dispatch(setTitle("Crear Exposición"));
+        dispatch(setContent(modalContent));
+    }
+
+    const handleCreateIlustrationlick = () => {
+        dispatch(openModal());
+        dispatch(setTitle("Crear Ilustración"));
+        dispatch(setContent(modalillustration));
+    }
 
   return (
-        <div>
-            {/* <a className="btn btn-outline-primary" href='/Galaxy'>
+        <Container>
+            <a className="btn btn-outline-primary" href='/Galaxy'>
                 Go to Galaxy
             </a>
          
-            <Button variant='outlined' href='/GltfScene'>Button</Button> */}
+            <Button variant='outlined' href='/room'>Button</Button>
 
-            <ModalButton modalContent={modalContent} title="Crear Exposición" buttonLabel='Crear Exposición'/>
-            <ModalButton modalContent={modalillustration} title="Crear Ilustración" buttonLabel='Crear ilustración'/>
-    
+            <ListExhibitions></ListExhibitions>
+            <Button sx={{ mt: 1 }} variant='contained' onClick={handleCreateExhibitionClick}>Crear Exposicion</Button>
+            <Button sx={{ mt: 1, ml: 1}} variant='contained' onClick={handleCreateIlustrationlick}>Crear Ilustracion</Button>
 
-        </div>
+        </Container>
     )
 }
+
 
 export default Home

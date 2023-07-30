@@ -1,4 +1,3 @@
-import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useGetExhibitionsQuery, apiSlice, useCreateExhibitionsMutation } from '../../features/api/apiSlice';
 
 const ExhibitionsComponent = () => {

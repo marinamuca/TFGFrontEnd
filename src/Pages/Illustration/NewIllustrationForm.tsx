@@ -1,17 +1,19 @@
-// import { Button, Col, Row, Form } from 'react-bootstrap';
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';
-import { useCreateIllustrationMutation } from '../features/api/apiSlice';
-import { Illustration } from '../features/types';
+import { useCreateIllustrationMutation } from '../../features/api/apiSlice';
+import { Illustration } from '../../features/types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from 'dayjs';
-import FileUpload from '../components/FileUpload';
+import FileUpload from '../../components/FileUpload';
+import { useParams } from 'react-router';
 
+interface NewIllustrarionFormProps {
+    id_exhibition: string
+}
 
-
-const NewIllustrationForm = () => {
+const NewIllustrationForm = (props: NewIllustrarionFormProps) => {
     const [sendCreateIllustration, response] = useCreateIllustrationMutation()
 
     const [illustration, setIllustration] = useState<Illustration>({
@@ -19,7 +21,7 @@ const NewIllustrationForm = () => {
         description: "",
         image: null,
         date: "",
-        exhibition: "61"
+        exhibition: props.id_exhibition
     });
 
     function handleSubmit(event: any) {
@@ -35,10 +37,6 @@ const NewIllustrationForm = () => {
         sendCreateIllustration(formData);
     }
 
-    // if (response.error) {
-    //     console.log(response.error)
-    // }
-
     return (
         <FormControl sx={{ m: 3 }}>
             <TextField size='small' label="Titulo de la ilustración" sx={{ mb: 3 }} value={illustration.title} onChange={(e) => { setIllustration({ ...illustration, title: e.target.value }) }} fullWidth></TextField>
@@ -50,7 +48,6 @@ const NewIllustrationForm = () => {
 
             <Button variant='contained' type='submit' onClick={handleSubmit}>Crear</Button>
         </FormControl>
-
     )
 }
 

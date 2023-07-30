@@ -7,7 +7,11 @@ import * as THREE from 'three'
 import React, {useState} from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { Illustration } from './Illustration'
+import { FrameModel } from './FrameModel'
+import { useAppDispatch } from '../hooks/appHooks'
+import { openModal, setContent, setTitle } from '../features/modalSlice'
+import { ThreeEvent } from '@react-three/fiber'
+import { Frame } from '../features/types'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,6 +37,8 @@ export enum EdgeType{
 
 interface propsRoomCell{
   groupProps: JSX.IntrinsicElements['group'];
+  frames: Frame[];
+  handleFrameClick: Function;
   materialSuelo?: THREE.Material;
   materialPared?: THREE.Material;
   type: CellType;
@@ -54,17 +60,19 @@ export function RoomCell(props: propsRoomCell) {
     materialPared = props.materialPared
   }
 
-  const [texture, setTexture] = useState('textures/2.jpg')
+  
+
+  const [texture, setTexture] = useState('/textures/2.jpg')
   return (
     <group {...props.groupProps} dispose={null} >
       <mesh  geometry={nodes.Suelo.geometry} material={materialSuelo} position={[0, 1.3, 0]} />
       {props.type != CellType.floor? 
         <>
           <mesh  geometry={nodes.Pared.geometry} material={materialPared} position={[0, 1.3, 0]}  />
-          <Illustration meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0]} } imgUrl={'textures/1.jpg'}></Illustration>
+          <FrameModel meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0], onClick: ( (e) => {props.handleFrameClick(props.frames[0].position); e.stopPropagation(); })} } imgUrl={props.frames[0].image}></FrameModel>
         </> : null }
         {props.type == CellType.corner? 
-        <Illustration meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => {setTexture('textures/1.jpg'); e.stopPropagation(); })  } } imgUrl={texture}></Illustration>
+        <FrameModel meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => {props.handleFrameClick(props.frames[1].position); e.stopPropagation(); })  } } imgUrl={props.frames[1].image}></FrameModel>
         : null}
         
     </group>

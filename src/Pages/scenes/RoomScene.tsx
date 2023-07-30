@@ -1,18 +1,36 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import {Picker} from "../../components/test/Box";
 import { OrbitControls, Environment } from '@react-three/drei';
 import { ColorPicker, Room } from "../../components/Room";
+import { APP_BAR_HEIGHT } from '../../components/Navbar';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/appHooks';
+import { useGetExhibitionByIDQuery } from '../../features/api/apiSlice';
+
+type params = {
+    id: string
+}
 
 const RoomScene = () => {
+    const { id } = useParams<params>();
+    const dispatch = useAppDispatch();
+    const {data: exhibition, isLoading, isFetching} =  useGetExhibitionByIDQuery(id)
+
+    if (isLoading || isFetching) {
+        return <div>Loading...</div>;
+    }
+
+    let illustrations = exhibition.illustrations;
+
+    
+
     return (
         <>
-            <Picker/>
-            <Canvas>
+            <Canvas style={{ height: `calc(100vh - ${APP_BAR_HEIGHT}px)` }}>
                 <ambientLight intensity={0.5}/>
                 <Suspense fallback={null}>
-                    <Room rows={3} cols={3}></Room>
-                    <Environment files="textures/hdr.hdr"/>
+                    <Room rows={exhibition.room_width} cols={exhibition.room_length} illustrations={illustrations}></Room>
+                    <Environment files="/textures/hdr.hdr"/>
                 </Suspense>
                 <OrbitControls/>
                 <spotLight intensity={0.3} position={[5,20,20]}/>

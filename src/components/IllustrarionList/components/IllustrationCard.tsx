@@ -8,7 +8,7 @@ const IllustrationCard = (props: IllustrationCardProps) => {
   const placed = props.illustration.position > -1;
 
   return (
-    <Card variant="outlined" key={props.illustration.id}  touchRippleColor="red">
+    <Card variant="outlined" key={props.illustration.id}>
       <CardActionArea href="/illustration">
         <CardMedia
           sx={{ height: 0, paddingTop: "100%" }}

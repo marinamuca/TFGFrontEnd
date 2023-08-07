@@ -1,11 +1,10 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
-import { ColorPicker, Room } from "../../components/Room";
-import { APP_BAR_HEIGHT } from '../../components/Navbar';
+import { ColorPicker, Room } from "./components/Room";
+import { APP_BAR_HEIGHT } from '../../components/Navbar/Navbar';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/appHooks';
-import { useGetExhibitionByIDQuery } from '../../features/api/apiSlice';
+import { useGetExhibitionByIDQuery } from '../../domain/api/apiSlice';
 
 type params = {
     id: string
@@ -13,7 +12,6 @@ type params = {
 
 const RoomScene = () => {
     const { id } = useParams<params>();
-    const dispatch = useAppDispatch();
     const {data: exhibition, isLoading, isFetching} =  useGetExhibitionByIDQuery(id)
 
     if (isLoading || isFetching) {

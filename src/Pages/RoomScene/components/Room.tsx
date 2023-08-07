@@ -5,11 +5,11 @@ import { Euler, Vector3 } from '@react-three/fiber';
 import { RoomCell, CellType, EdgeType } from './RoomCell';
 import {HexColorPicker} from "react-colorful";
 import {proxy, useSnapshot} from "valtio"
-import { Illustration } from '../features/types';
-import { useAppDispatch } from '../hooks/appHooks';
-import { openModal, setContent, setTitle } from '../features/modalSlice';
+import { Illustration } from '../../../domain/types/types';
+import { useAppDispatch } from '../../../hooks/appHooks';
+import { openModal, setContent, setTitle } from '../../../redux/modalSlice';
 import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
-import { useUpdateIllustrationMutation } from '../features/api/apiSlice';
+import { useUpdateIllustrationMutation } from '../../../domain/api/apiSlice';
 
 interface roomProps{
     rows: number;

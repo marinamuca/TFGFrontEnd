@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';
-import { Exhibition } from '../../features/types'
-import { useCreateExhibitionsMutation } from '../../features/api/apiSlice';
+import { Exhibition } from '../../../../domain/types/types'
+import { useCreateExhibitionsMutation } from '../../../../domain/api/apiSlice';
 
 
 const NewExhibitionForm = () => {
@@ -26,7 +26,6 @@ const NewExhibitionForm = () => {
     } else if(response.isSuccess){
         window.location.reload();
     }
-
 
     return (
         <FormControl sx={{m: 3, width: 225}}>

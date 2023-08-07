@@ -1,12 +1,12 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 import Exhibitions from '../components/test/Exhibitions'
-import NewExhibitionForm from './Exhibition/NewExhibition';
-import NewIllustrarionForm from './Illustration/NewIllustrationForm';
-import ListExhibitions from './Exhibition/ListExhibitions';
+import NewExhibitionForm from './Gallery/components/NewExhibitionForm/NewExhibitionForm';
+import NewIllustrarionForm from './Exhibition/components/NewIllustrationForm/NewIllustrationForm';
+import ExhibitionList from '../components/ExhibitionList/ExhibitionList';
 import { Container } from '@mui/material';
 import { useAppDispatch } from '../hooks/appHooks';  
-import { openModal, setContent, setTitle } from '../features/modalSlice';
+import { openModal, setContent, setTitle } from '../redux/modalSlice';
 
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
          
             <Button variant='outlined' href='/room'>Button</Button>
 
-            <ListExhibitions></ListExhibitions>
+            <ExhibitionList></ExhibitionList>
             <Button sx={{ mt: 1 }} variant='contained' onClick={handleCreateExhibitionClick}>Crear Exposicion</Button>
             <Button sx={{ mt: 1, ml: 1}} variant='contained' onClick={handleCreateIlustrationlick}>Crear Ilustracion</Button>
 

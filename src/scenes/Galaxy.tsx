@@ -1,6 +1,6 @@
 import React from 'react'
 // three.js
-import Sphere from "../../components/test/Sphere";
+import Sphere from "../components/test/Sphere";
 import { Vector3 } from 'three'; 'three'
 // drei
 import {OrbitControls, Stars} from '@react-three/drei'

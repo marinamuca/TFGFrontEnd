@@ -7,11 +7,11 @@ import * as THREE from 'three'
 import React, {useState} from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { FrameModel } from './FrameModel'
-import { useAppDispatch } from '../hooks/appHooks'
-import { openModal, setContent, setTitle } from '../features/modalSlice'
+import { openModal, setContent, setTitle } from '../../../redux/modalSlice'
 import { ThreeEvent } from '@react-three/fiber'
-import { Illustration } from '../features/types'
+import { Illustration } from '../../../domain/types/types'
+import { FrameModel } from './FrameModel'
+import { useAppDispatch } from '../../../hooks/appHooks'
 
 type GLTFResult = GLTF & {
   nodes: {

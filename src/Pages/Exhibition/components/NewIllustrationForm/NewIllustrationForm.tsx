@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';
-import { useCreateIllustrationMutation } from '../../features/api/apiSlice';
-import { IllustrationInput } from '../../features/types';
+import { useCreateIllustrationMutation } from '../../../../domain/api/apiSlice';
+import { IllustrationInput } from '../../../../domain/types/types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from 'dayjs';
 import { MuiFileInput } from 'mui-file-input';
@@ -34,6 +34,12 @@ const NewIllustrationForm = (props: NewIllustrarionFormProps) => {
         formData.append('exhibition', illustration.exhibition);
 
         sendCreateIllustration(formData);
+    }
+
+    if(response.isError){
+        console.log(response.error)
+    } else if(response.isSuccess){
+        window.location.reload();
     }
 
     return (

@@ -1,4 +1,3 @@
-// import { Button, Col, Row, Form } from 'react-bootstrap';
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -20,7 +19,6 @@ const NewExhibitionForm = () => {
     function handleSubmit(event: any){
         event.preventDefault();
         addExhibition(exhibition)
-        console.log(exhibition)
     }
 
     if(response.isError){

@@ -28,12 +28,12 @@ const Exhibition = () => {
         dispatch(setTitle("Crear Ilustración"));
         dispatch(setContent(modalContent));
     }
-    console.log(exhibition)
 
     return (
         <Container sx={{ m: 1 }}>
             <ListIllustrations illustrations={exhibition.illustrations}/>
-            <Button sx={{ mt: 1 }} variant='contained' onClick={handleCreateIlustrationlick}>Nueva Ilustración</Button>
+            <Button sx={{ mt: 1 }} variant='outlined' onClick={handleCreateIlustrationlick}>Nueva Ilustración</Button>
+            <Button sx={{ mt: 1, ml: 1 }} variant='contained' href={`/room/${exhibition.id}`}>Ver Sala 3D</Button>
         </Container>
 
     );

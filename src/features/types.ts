@@ -7,15 +7,19 @@ export interface Exhibition {
 }
 
 export interface Illustration {
-  title: string,
-  description: string,
-  date: string,
-  image: File | null,
-  exhibition: string,
-  position: number
+  id?: string;
+  title: string;
+  description: string;
+  date: string;
+  image?:  string;
+  exhibition: string;
+  position: number;
 }
-
-export interface Frame {
-  position: number,
-  image: string,
+export interface IllustrationInput{
+  id?: string;
+  title: string;
+  description: string;
+  date: string;
+  image: File | null;
+  exhibition: string;
 }

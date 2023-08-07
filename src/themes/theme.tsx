@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
 
 const appTheme = createTheme({
   palette: {
@@ -18,7 +17,6 @@ const appTheme = createTheme({
             main: '#9dda63',
             contrastText: "#ffffff"
         },
-        
     },
 });
 

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css'
 import Galaxy from "./pages/scenes/Galaxy";
 import Home from "./pages/Home";
-import 'bootstrap/dist/css/bootstrap.css';
 import RoomScene from "./pages/scenes/RoomScene";
 import { Provider } from "react-redux";
 import { store } from "./store";

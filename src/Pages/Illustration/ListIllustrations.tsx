@@ -9,7 +9,6 @@ interface ListIllustrationsProps{
 const ListIllustrations = (props: ListIllustrationsProps) => {
 
     return (
-   
         <Box>
             <Grid container spacing={2}>
                 {props.illustrations?.map((illustration: any) => (

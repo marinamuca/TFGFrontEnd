@@ -1,4 +1,4 @@
-  body{
+  body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     box-sizing: content-box;
     /* display: flex; */
@@ -7,7 +7,7 @@
     max-width: 100%;
     margin: 0;
   }
-  
+
   h1 {
     position: absolute;
     top: 43px;

@@ -11,7 +11,7 @@ import { FrameModel } from './FrameModel'
 import { useAppDispatch } from '../hooks/appHooks'
 import { openModal, setContent, setTitle } from '../features/modalSlice'
 import { ThreeEvent } from '@react-three/fiber'
-import { Frame } from '../features/types'
+import { Illustration } from '../features/types'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -37,7 +37,7 @@ export enum EdgeType{
 
 interface propsRoomCell{
   groupProps: JSX.IntrinsicElements['group'];
-  frames: Frame[];
+  frames: Illustration[];
   handleFrameClick: Function;
   materialSuelo?: THREE.Material;
   materialPared?: THREE.Material;
@@ -62,17 +62,17 @@ export function RoomCell(props: propsRoomCell) {
 
   
 
-  const [texture, setTexture] = useState('/textures/2.jpg')
+  const [frames, setFrames] = useState(props.frames)
   return (
     <group {...props.groupProps} dispose={null} >
       <mesh  geometry={nodes.Suelo.geometry} material={materialSuelo} position={[0, 1.3, 0]} />
       {props.type != CellType.floor? 
         <>
           <mesh  geometry={nodes.Pared.geometry} material={materialPared} position={[0, 1.3, 0]}  />
-          <FrameModel meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0], onClick: ( (e) => {props.handleFrameClick(props.frames[0].position); e.stopPropagation(); })} } imgUrl={props.frames[0].image}></FrameModel>
+          <FrameModel meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0], onClick: ( (e) => {props.handleFrameClick(frames[0]); e.stopPropagation(); })} } imgUrl={frames[0].image as string}></FrameModel>
         </> : null }
         {props.type == CellType.corner? 
-        <FrameModel meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => {props.handleFrameClick(props.frames[1].position); e.stopPropagation(); })  } } imgUrl={props.frames[1].image}></FrameModel>
+        <FrameModel meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => {props.handleFrameClick(frames[1]); e.stopPropagation(); })  } } imgUrl={frames[1].image as string}></FrameModel>
         : null}
         
     </group>

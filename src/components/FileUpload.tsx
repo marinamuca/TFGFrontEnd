@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from 'react'
 import { FaPaperclip } from 'react-icons/fa'
+// import 'bootstrap/dist/css/bootstrap.css';
 
 interface FileUploadProps {
     file: File | null,

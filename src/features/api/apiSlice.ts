@@ -29,8 +29,15 @@ export const apiSlice = createApi({
           body: body,
           formData: true
         })
+    }),
+    updateIllustration: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `illustration/${id}/`,
+        method: 'PUT',
+        body: body
+      })
     })
   }),
 });
 
-export const { useGetExhibitionsQuery,  useGetExhibitionByIDQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery } = apiSlice;
+export const { useGetExhibitionsQuery,  useGetExhibitionByIDQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery, useUpdateIllustrationMutation } = apiSlice;

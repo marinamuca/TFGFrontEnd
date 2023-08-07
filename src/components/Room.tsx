@@ -5,10 +5,11 @@ import { Euler, Vector3 } from '@react-three/fiber';
 import { RoomCell, CellType, EdgeType } from './RoomCell';
 import {HexColorPicker} from "react-colorful";
 import {proxy, useSnapshot} from "valtio"
-import { Frame } from '../features/types';
+import { Illustration } from '../features/types';
 import { useAppDispatch } from '../hooks/appHooks';
 import { openModal, setContent, setTitle } from '../features/modalSlice';
-import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
+import { useUpdateIllustrationMutation } from '../features/api/apiSlice';
 
 interface roomProps{
     rows: number;
@@ -53,12 +54,10 @@ function edgeRotation(i: number, j: number, rows: number, cols: number){
 }
 
 function placeFrame( position: number, illustrations: any ){
-    let frame = {} as Frame;
-    frame.position = position
-    frame.image = ""
+    let frame = {} as Illustration;
 
     if(illustrations[0] && illustrations[0].position == position){
-        frame.image = illustrations[0].image
+        frame = illustrations[0]
         illustrations.shift();
     }
     
@@ -83,15 +82,45 @@ export function Room(props: roomProps) {
     let frame_pos = -1; 
 
     const dispatch = useAppDispatch();
-    const handleFrameClick = (position: number) => {
-        dispatch(openModal())
-        dispatch(setTitle("Añadir ilustracion"))
-        dispatch(
-          setContent(
-            <></>
-          )
-        );
-    }
+    const [updateIllustration, response] = useUpdateIllustrationMutation();
+
+    const handleFrameChange = ( illustration: Illustration, frame: Illustration ) => {
+      let auxFrame = (({ image, ...o }) => o)(frame);
+      auxFrame.position = -1;
+      updateIllustration({ id: auxFrame.id, body: auxFrame });
+
+      let auxIllustration = (({ image, ...o }) => o)(illustration);
+      auxIllustration.position = frame.position;
+      updateIllustration({ id: illustration.id, body: auxIllustration });
+    };
+
+    const handleFrameClick = (frame: Illustration) => {
+      dispatch(openModal());
+      dispatch(setTitle("Añadir ilustracion"));
+      dispatch(
+        setContent(
+          <Container>
+            <List>
+              {props.illustrations.map((illustration: any) => {
+                return (
+                  <ListItemButton
+                    key={illustration.id}
+                    onClick={(e) => {
+                      handleFrameChange(illustration, frame);
+                    }}
+                  >
+                    <ListItemAvatar>
+                      <Avatar src={illustration.image} variant="square" />
+                    </ListItemAvatar>
+                    <ListItemText primary={illustration.title} />
+                  </ListItemButton>
+                );
+              })}
+            </List>
+          </Container>
+        )
+      );
+    };
 
     for (let i = 0; i < props.rows; i++) {
         for (let j = 0; j < props.cols; j++) {
@@ -99,7 +128,7 @@ export function Room(props: roomProps) {
             let rotation = [0,0,0] as Euler
             let cellType = CellType.floor
             let edgeType = EdgeType.rounded
-            let frames = [] as Frame[];
+            let frames = [] as Illustration[];
 
             if( checkCorner(i, j, props.rows, props.cols)){ 
                 // CORNER

@@ -22,8 +22,6 @@ const RoomScene = () => {
 
     let illustrations = exhibition.illustrations;
 
-    
-
     return (
         <>
             <Canvas style={{ height: `calc(100vh - ${APP_BAR_HEIGHT}px)` }}>

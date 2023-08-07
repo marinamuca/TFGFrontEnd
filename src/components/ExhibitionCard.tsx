@@ -5,7 +5,8 @@ interface ExhibitionCardProps {
 }
 
 const ExhibitionCard = (props: ExhibitionCardProps) => {
-   
+    const maxIllustrations = parseInt(props.exhibition.room_width) * 2 + parseInt(props.exhibition.room_length) * 2;
+
     return (
         <Card variant="outlined" key={props.exhibition.id}>
         <CardContent>
@@ -20,6 +21,9 @@ const ExhibitionCard = (props: ExhibitionCardProps) => {
             </Typography>
             <Typography variant="body2">
                 Tamaño Sala: {props.exhibition.room_width} x {props.exhibition.room_length}
+            </Typography>
+            <Typography variant="body2">
+                Número de ilustraciones: {props.exhibition.illustrations.length} / {maxIllustrations}
             </Typography>
         </CardContent>
         <CardActions>

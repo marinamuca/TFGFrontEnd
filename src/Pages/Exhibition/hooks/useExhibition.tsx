@@ -8,7 +8,7 @@ type params = {
     id: string
 }
 
-const useExhibition = () => {
+const useExhibitionCard = () => {
     const { id } = useParams<params>();
     const dispatch = useAppDispatch();
     const {data: exhibition, isLoading, isFetching} = useGetExhibitionByIDQuery(id)
@@ -21,4 +21,4 @@ const useExhibition = () => {
 
     return {handleCreateIlustrationClick, exhibition, isLoading, isFetching};
 }
-export default useExhibition;
+export default useExhibitionCard;

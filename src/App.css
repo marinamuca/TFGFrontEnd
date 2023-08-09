@@ -35,3 +35,8 @@
     justify-content: space-between;
     height: 100%;
 }
+
+.imgPreview{
+  max-width: calc(0.7 * 100vh);
+  max-height: calc(0.7 * 100vh);
+}

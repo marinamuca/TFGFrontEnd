@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import IllustrationCard from './components/IllustrationCard';
+import IllustrationCard from './components/IllustrationCard/IllustrationCard';
 
 interface ListIllustrationsProps{
     illustrations?: [];

@@ -47,7 +47,7 @@ const NewIllustrationForm = (props: NewIllustrarionFormProps) => {
             <TextField size='small' label="Titulo de la ilustración" sx={{ mb: 3 }} value={illustration.title} onChange={(e) => { setIllustration({ ...illustration, title: e.target.value }) }} fullWidth></TextField>
             <TextField size='small' label="Descripción de la ilustración" sx={{ mb: 3 }} value={illustration.description} onChange={(e) => { setIllustration({ ...illustration, description: e.target.value }) }} fullWidth></TextField>
     
-            <DatePicker sx={{ mb: 3 }} label="Fecha de realización" onChange={(e: Dayjs | null) => {setIllustration({...illustration, date: e!.format('YYYY-MM-DD')})}}/>
+            <DatePicker sx={{ mb: 3 }} label="Fecha de realización" format='DD/MM/YYYY' onChange={(e: Dayjs | null) => {setIllustration({...illustration, date: e!.format('YYYY-MM-DD')})}}/>
          
             <MuiFileInput sx={{ mb: 3 }} placeholder="Selecciona un archivo" value={illustration.image} onChange={(e: File | null) => { setIllustration({ ...illustration, image: e }) }} fullWidth/>
 

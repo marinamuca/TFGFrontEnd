@@ -1,6 +1,8 @@
 import { Button, Card, CardActions, CardContent, Typography, CardActionArea } from '@mui/material';
 import { useDimensions } from '../../../../hooks/appHooks';
 import useExhibitionCard from './hooks/useExhibitionCard';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 interface ExhibitionCardProps {
     exhibition: any
@@ -51,8 +53,9 @@ const ExhibitionCard: React.FC<ExhibitionCardProps>= ({exhibition}) => {
             href={"/room/" + exhibition.id}
             color="info"
             sx={buttonStyle}
+            startIcon={<VisibilityIcon />}
           >
-            Ver sala 3D
+            Sala 3D
           </Button>
           <Button
             size="small"
@@ -60,6 +63,7 @@ const ExhibitionCard: React.FC<ExhibitionCardProps>= ({exhibition}) => {
             color="error"
             sx={buttonStyle}
             onClick={handleDeleteClick}
+            startIcon={<DeleteIcon />}
           >
             Eliminar
           </Button>

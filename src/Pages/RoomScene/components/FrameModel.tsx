@@ -13,7 +13,7 @@ interface FrameModelProps{
 }
 
 export function FrameModel(props: FrameModelProps ) {
-  let texture = useTexture("/src/assets/noImg.png")
+  let texture = useTexture("/src/assets/noImg.jpg")
   let planeHeight = props.maxSize || 1
   let planeWidth = planeHeight / 2
 
@@ -34,7 +34,7 @@ export function FrameModel(props: FrameModelProps ) {
   return (
     <mesh {...props.meshProps}>
       <planeBufferGeometry  attach="geometry"
-                            args={[planeWidth, planeHeight]}  />
+                            args={[planeWidth, planeHeight]} />
       <meshStandardMaterial map={texture} color={props.imgUrl? 0xffffff : 0x00ffff}/>
     </mesh>
   )

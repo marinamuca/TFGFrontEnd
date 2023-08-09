@@ -1,8 +1,9 @@
 
 import React, { useCallback } from "react";
-import { useDeleteExhibitionMutation } from "../../../../../domain/api/apiSlice";
+import { useDeleteIllustrationMutation } from "../../../../../domain/api/apiSlice";
 import DeleteDialog from "../../../../DeleteDialog/DeleteDialog";
 import { useAppDispatch } from "../../../../../hooks/appHooks";
+import Box from '@mui/material/Box';
 import {
   openModal,
   setContent,
@@ -10,16 +11,16 @@ import {
   closeModal,
 } from "../../../../../redux/modalSlice";
 
-const useExhibitionCard = (id: string) => {
+const useIllustrationCard = (id: string, image: string) => {
   const dispatch = useAppDispatch();
-  const [deleteExhibition, response] = useDeleteExhibitionMutation();
+  const [deleteIllustration, response] = useDeleteIllustrationMutation();
   const modalContent = (
     <DeleteDialog
       handleCancelClick={() => {
         dispatch(closeModal());
       }}
       handleDeleteClick={() => {
-        deleteExhibition(id);
+        deleteIllustration(id);
       }}
     />
   );
@@ -28,10 +29,13 @@ const useExhibitionCard = (id: string) => {
     dispatch(openModal());
     dispatch(setTitle("¿Seguro que quiere eliminar?"));
     dispatch(setContent(modalContent))
-    console.log(id);
   }, [id]);
 
-  return { handleDeleteClick, responseDelete: response };
+  const handleIllustrationClick = useCallback(() => {
+    dispatch(openModal());
+    dispatch(setContent(<img src={image} className="imgPreview"/>))
+  }, [image]); 
+  return { handleDeleteClick, responseDelete: response, handleClick: handleIllustrationClick};
 };
 
-export default useExhibitionCard;
+export default useIllustrationCard;

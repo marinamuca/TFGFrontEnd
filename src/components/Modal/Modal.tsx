@@ -16,6 +16,7 @@ const style = {
     boxShadow: 24,
     borderRadius: "25px",
     p: 4,
+    with: "fit-content"
   };
 
 export default function AppModal() {

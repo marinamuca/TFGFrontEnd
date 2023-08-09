@@ -36,6 +36,12 @@ export const apiSlice = createApi({
         formData: true,
       }),
     }),
+    deleteIllustration: builder.mutation({
+      query: (id) => ({
+        url: `illustration/${id}/`,
+        method: "DELETE",
+      }),
+    }),
     updateIllustration: builder.mutation({
       query: ({ id, body }) => ({
         url: `illustration/${id}/`,
@@ -54,4 +60,5 @@ export const {
   useGetIllustrationsQuery,
   useUpdateIllustrationMutation,
   useDeleteExhibitionMutation,
+  useDeleteIllustrationMutation
 } = apiSlice;

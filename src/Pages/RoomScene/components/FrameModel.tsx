@@ -13,22 +13,22 @@ interface FrameModelProps{
 }
 
 export function FrameModel(props: FrameModelProps ) {
-  let texture 
+  let texture = useTexture("/src/assets/noImg.png")
   let planeHeight = props.maxSize || 1
   let planeWidth = planeHeight / 2
 
   if(props.imgUrl){
     texture = useTexture(props.imgUrl)
-    planeHeight = texture.image.height
-    planeWidth = texture.image.width
+  } 
+  planeHeight = texture.image.height
+  planeWidth = texture.image.width
 
-    if(planeHeight > planeWidth){
-      planeWidth = planeWidth / planeHeight;
-      planeHeight = 1;
-    } else {
-      planeHeight = planeHeight / planeWidth;
-      planeWidth = 1;
-    }
+  if(planeHeight > planeWidth){
+    planeWidth = planeWidth / planeHeight;
+    planeHeight = 1;
+  } else {
+    planeHeight = planeHeight / planeWidth;
+    planeWidth = 1;
   }
 
   return (

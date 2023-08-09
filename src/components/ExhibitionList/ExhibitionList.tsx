@@ -1,6 +1,6 @@
 import { useGetExhibitionsQuery } from '../../domain/api/apiSlice';
 import { Grid } from '@mui/material';
-import ExhibitionCard from './components/ExhibitionCard';
+import ExhibitionCard from './components/ExhibitionCard/ExhibitionCard';
 
 const ExhibitionList = () => {
   const {

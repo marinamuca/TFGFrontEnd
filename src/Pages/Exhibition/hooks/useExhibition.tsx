@@ -18,6 +18,7 @@ const useExhibition = () => {
         dispatch(setTitle("Crear Ilustración"));
         dispatch(setContent(<NewIllustrationForm id_exhibition={exhibition.id}></NewIllustrationForm>));
     }
+
     return {handleCreateIlustrationClick, exhibition, isLoading, isFetching};
 }
 export default useExhibition;

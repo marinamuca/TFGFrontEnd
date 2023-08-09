@@ -1,10 +1,10 @@
 // Or from '@reduxjs/toolkit/query/react'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { Exhibition } from '../types/types'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { Exhibition } from "../types/types";
 
 export const apiSlice = createApi({
   reducerPath: "API_TFG",
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
   endpoints: (builder) => ({
     getExhibitions: builder.query({
       query: () => `exhibition/`,
@@ -12,32 +12,46 @@ export const apiSlice = createApi({
     getExhibitionByID: builder.query({
       query: (id) => `exhibition/${id}/`,
     }),
+    deleteExhibition: builder.mutation({
+      query: (id) => ({
+        url: `exhibition/${id}/`,
+        method: "DELETE",
+      }),
+    }),
     createExhibitions: builder.mutation({
-        query: (body) => ({
-          url: `exhibition/`,
-          method: 'POST',
-          body,
-        })
+      query: (body) => ({
+        url: `exhibition/`,
+        method: "POST",
+        body,
+      }),
     }),
     getIllustrations: builder.query({
       query: () => `illustration/`,
     }),
     createIllustration: builder.mutation({
-        query: (body) => ({
-          url: `illustration/`,
-          method: 'POST',
-          body: body,
-          formData: true
-        })
+      query: (body) => ({
+        url: `illustration/`,
+        method: "POST",
+        body: body,
+        formData: true,
+      }),
     }),
     updateIllustration: builder.mutation({
       query: ({ id, body }) => ({
         url: `illustration/${id}/`,
-        method: 'PUT',
-        body: body
-      })
-    })
+        method: "PUT",
+        body: body,
+      }),
+    }),
   }),
 });
 
-export const { useGetExhibitionsQuery,  useGetExhibitionByIDQuery, useCreateExhibitionsMutation, useCreateIllustrationMutation, useGetIllustrationsQuery, useUpdateIllustrationMutation } = apiSlice;
+export const {
+  useGetExhibitionsQuery,
+  useGetExhibitionByIDQuery,
+  useCreateExhibitionsMutation,
+  useCreateIllustrationMutation,
+  useGetIllustrationsQuery,
+  useUpdateIllustrationMutation,
+  useDeleteExhibitionMutation,
+} = apiSlice;

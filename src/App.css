@@ -28,3 +28,10 @@
     width: 90px !important;
     height: 90px !important;
   }
+
+  .MuiCard-root{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

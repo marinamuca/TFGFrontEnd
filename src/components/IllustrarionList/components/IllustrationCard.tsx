@@ -1,4 +1,6 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface IllustrationCardProps {
     illustration: any
@@ -8,8 +10,8 @@ const IllustrationCard = (props: IllustrationCardProps) => {
   const placed = props.illustration.position > -1;
 
   return (
-    <Card variant="outlined" key={props.illustration.id}>
-      <CardActionArea href="/illustration">
+    <Card variant="outlined" key={props.illustration.id} sx={{ heigth: "100%" }}>
+      {/* <CardActionArea href="/illustration"> */}
         <CardMedia
           sx={{ height: 0, paddingTop: "100%" }}
           image={props.illustration.image}
@@ -29,10 +31,31 @@ const IllustrationCard = (props: IllustrationCardProps) => {
             {props.illustration.date_painted}
           </Typography>
           <Typography variant="body2">
-            {placed ? "Colocada en la sala" : "No colocada en la sala"}
+            {placed ? "Colocada en sala" : "Sin colocar"}
           </Typography>
         </CardContent>
-      </CardActionArea>
+      {/* </CardActionArea> */}
+      <CardActions>
+        <Button
+            size="small"
+            variant="outlined"
+            color="info"
+            sx={{ mr: 1, ml: 1, width: "45%" }}
+            startIcon={<EditIcon />}
+          >
+            Editar
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            color="error"
+            sx={{ ml: 1, mr: 1, width: "55%" }}
+            startIcon={<DeleteIcon />}
+          >
+            Eliminar
+          </Button>
+          
+        </CardActions>
     </Card>
   );
 };

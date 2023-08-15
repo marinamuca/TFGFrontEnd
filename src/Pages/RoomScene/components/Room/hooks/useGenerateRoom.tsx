@@ -7,7 +7,7 @@ import { NO_POSITION, TILE_SIZE } from "../../../../../constants";
 import { Illustration } from "../../../../../domain/types/types";
 import { useAppDispatch } from "../../../../../hooks/appHooks";
 import { showPicker } from "../../../../../redux/colorPickerSlice";
-import { openModal, setContent, setTitle } from "../../../../../redux/modalSlice";
+import { openModal, closeModal, setContent, setTitle } from "../../../../../redux/modalSlice";
 import { RoomCell, CellType, EdgeType } from "../../RoomCell";
 
 const useGenerateRoom = (

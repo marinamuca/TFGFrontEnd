@@ -69,10 +69,10 @@ export function RoomCell(props: propsRoomCell) {
       {props.type != CellType.floor? 
         <>
           <mesh  geometry={nodes.Pared.geometry} material={materialPared} position={[0, 1.3, 0]}  />
-          <FrameModel meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0], onClick: ( (e) => {props.handleFrameClick(frames[0]); e.stopPropagation(); })} } imgUrl={frames[0].image as string}></FrameModel>
+          <FrameModel meshProps={ {position: [-0.999,1.3,0], rotation: [0,Math.PI/2,0], onClick: ( (e) => { e.stopPropagation(); props.handleFrameClick(frames[0]); })} } imgUrl={frames[0].image as string}></FrameModel>
         </> : null }
         {props.type == CellType.corner? 
-        <FrameModel meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => {props.handleFrameClick(frames[1]); e.stopPropagation(); })  } } imgUrl={frames[1].image as string}></FrameModel>
+        <FrameModel meshProps={ {position: [0,1.3,-0.999], onClick: ( (e) => { e.stopPropagation(); props.handleFrameClick(frames[1]);})  } } imgUrl={frames[1].image as string}></FrameModel>
         : null}
         
     </group>

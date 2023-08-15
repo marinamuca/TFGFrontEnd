@@ -1,10 +1,11 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
-import { ColorPicker, Room } from "./components/Room";
+import Room from "./components/Room/Room";
 import { APP_BAR_HEIGHT } from '../../components/Navbar/Navbar';
 import { useParams } from 'react-router-dom';
 import { useGetExhibitionByIDQuery } from '../../domain/api/apiSlice';
+import ColorPicker from './components/ColorPicker/ColorPicker';
 
 type params = {
     id: string
@@ -26,7 +27,7 @@ const RoomScene = () => {
                 <ambientLight intensity={0.5}/>
                 <Suspense fallback={null}>
                     <Room rows={exhibition.room_width} cols={exhibition.room_length} illustrations={illustrations}></Room>
-                    <Environment files="/textures/hdr.hdr"/>
+                    <Environment preset="forest" />
                 </Suspense>
                 <OrbitControls/>
                 <spotLight intensity={0.3} position={[5,20,20]}/>

@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { apiSlice } from "./domain/api/apiSlice";
 import modalReducer from "./redux/modalSlice";
+import colorPickerReducer from "./redux/colorPickerSlice";
 
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         modal: modalReducer,        
+        colorPicker: colorPickerReducer,        
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware)

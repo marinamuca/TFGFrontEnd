@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useGetExhibitionByIDQuery } from "../../../domain/api/apiSlice";
 import { useAppDispatch } from "../../../hooks/appHooks";
 import { openModal, setContent, setTitle } from "../../../redux/modalSlice";
-import NewIllustrationForm from "../components/NewIllustrationForm/NewIllustrationForm";
+import IllustrationForm from "../components/IllustrationForm/IllustrationForm";
 
 type params = {
     id: string
@@ -16,7 +16,7 @@ const useExhibitionCard = () => {
     const handleCreateIlustrationClick = () => {
         dispatch(openModal());
         dispatch(setTitle("Crear Ilustración"));
-        dispatch(setContent(<NewIllustrationForm id_exhibition={exhibition.id}></NewIllustrationForm>));
+        dispatch(setContent(<IllustrationForm id_exhibition={exhibition.id}></IllustrationForm>));
     }
 
     return {handleCreateIlustrationClick, exhibition, isLoading, isFetching};

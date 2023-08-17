@@ -10,8 +10,9 @@ import {
   setTitle,
   closeModal,
 } from "../../../../../redux/modalSlice";
+import IllustrationForm from "../../../../../pages/Exhibition/components/IllustrationForm";
 
-const useIllustrationCard = (id: string, image: string) => {
+const useIllustrationCard = (illustration: any, image: string) => {
   const dispatch = useAppDispatch();
   const [deleteIllustration, response] = useDeleteIllustrationMutation();
   const modalContent = (
@@ -20,7 +21,7 @@ const useIllustrationCard = (id: string, image: string) => {
         dispatch(closeModal());
       }}
       handleDeleteClick={() => {
-        deleteIllustration(id);
+        deleteIllustration(illustration.id);
       }}
     />
   );
@@ -29,13 +30,21 @@ const useIllustrationCard = (id: string, image: string) => {
     dispatch(openModal());
     dispatch(setTitle("¿Seguro que quiere eliminar?"));
     dispatch(setContent(modalContent))
-  }, [id]);
-
+  }, [illustration]);
+  
   const handleIllustrationClick = useCallback(() => {
     dispatch(openModal());
     dispatch(setContent(<img src={image} className="imgPreview"/>))
   }, [image]); 
-  return { handleDeleteClick, responseDelete: response, handleClick: handleIllustrationClick};
+  
+  const handleEditClick = useCallback(() => {
+    dispatch(openModal());
+    dispatch(setTitle("Editar Ilustracion"));
+    console.log(illustration)
+    dispatch(setContent(<IllustrationForm id_exhibition={illustration.exhibition} illustration={illustration}></IllustrationForm>))
+  }, [illustration]);
+
+  return { handleDeleteClick, responseDelete: response, handleClick: handleIllustrationClick, handleEditClick};
 };
 
 export default useIllustrationCard;

@@ -9,7 +9,7 @@ interface IllustrationCardProps {
 
 const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => {
   const placed = illustration.position > -1;
-  const {handleDeleteClick, responseDelete, handleClick} = useIllustrationCard(illustration.id, illustration.image);
+  const {handleDeleteClick, responseDelete, handleClick, handleEditClick} = useIllustrationCard(illustration, illustration.image);
 
   if (responseDelete.isError) {
     console.log(responseDelete.error);
@@ -21,7 +21,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => 
     <Card variant="outlined" key={illustration.id} sx={{ heigth: "100%" }}>
       <CardActionArea
         onClick={() => {
-          handleClick(illustration.image);
+          handleClick();
         }}
       >
         <CardMedia
@@ -52,6 +52,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => 
           color="info"
           sx={{ mr: 1, ml: 1, width: "45%" }}
           startIcon={<EditIcon />}
+          onClick={handleEditClick}
         >
           Editar
         </Button>

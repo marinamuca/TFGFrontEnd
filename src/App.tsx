@@ -27,7 +27,7 @@ function App() {
           <BrowserRouter>
             <Layout>
                 <Routes>
-                  <Route path="/" element={<Home />}></Route>
+                  <Route path="/" element={<Gallery />}></Route>
                   <Route path="/Galaxy" element={<Galaxy />}></Route>
                   <Route path="/room/:id" element={<RoomScene />}></Route>
                   <Route

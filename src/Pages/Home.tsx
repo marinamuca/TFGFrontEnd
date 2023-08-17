@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import Exhibitions from '../components/test/Exhibitions'
 import NewExhibitionForm from './Gallery/components/NewExhibitionForm/NewExhibitionForm';
-import NewIllustrarionForm from './Exhibition/components/NewIllustrationForm/NewIllustrationForm';
+import NewIllustrarionForm from './Exhibition/components/IllustrationForm/IllustrationForm';
 import ExhibitionList from '../components/ExhibitionList/ExhibitionList';
 import { Container } from '@mui/material';
 import { useAppDispatch } from '../hooks/appHooks';  

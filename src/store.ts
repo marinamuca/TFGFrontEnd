@@ -3,22 +3,22 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { apiSlice } from "./domain/api/apiSlice";
 import modalReducer from "./redux/modalSlice";
 import colorPickerReducer from "./redux/colorPickerSlice";
-import authReducer from "./redux/authSlice";
+import authSlice from "./redux/authSlice";
 
 export const store = configureStore({
-    reducer: {
-        [apiSlice.reducerPath]: apiSlice.reducer,
-        modal: modalReducer,        
-        colorPicker: colorPickerReducer,        
-        auth: authReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(apiSlice.middleware)
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    modal: modalReducer,
+    colorPicker: colorPickerReducer,
+    [authSlice.name]: authSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 setupListeners(store.dispatch);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

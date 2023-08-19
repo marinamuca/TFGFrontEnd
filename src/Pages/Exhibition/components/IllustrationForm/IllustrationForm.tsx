@@ -122,4 +122,4 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
   );
 }
 
-export default IllustrationForm
+export default React.memo(IllustrationForm)

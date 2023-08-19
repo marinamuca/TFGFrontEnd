@@ -115,4 +115,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default React.memo(Register);

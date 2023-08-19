@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Box, Button } from "@mui/material";
 
 interface DeleteDialogProps {
-    handleCancelClick: Function,
-    handleDeleteClick: Function
+  handleCancelClick: Function;
+  handleDeleteClick: Function;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({
@@ -19,7 +19,13 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
         mt: 2,
       }}
     >
-      <Button variant="contained" sx={{ mr: 1, ml: 1 }} onClick={() => {handleCancelClick()}}>
+      <Button
+        variant="contained"
+        sx={{ mr: 1, ml: 1 }}
+        onClick={() => {
+          handleCancelClick();
+        }}
+      >
         Cancelar
       </Button>
       <Button
@@ -36,4 +42,4 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   );
 };
 
-export default DeleteDialog;
+export default React.memo(DeleteDialog);

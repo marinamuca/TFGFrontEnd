@@ -4,6 +4,7 @@ export interface Exhibition {
   theme: string;
   room_width: string;
   room_length: string;
+  artist: string;
 }
 export interface ExhibitionErrorData {
   name?: string;
@@ -17,11 +18,11 @@ export interface Illustration {
   title: string;
   description: string;
   date: string;
-  image?:  string;
+  image?: string;
   exhibition: string;
   position: number;
 }
-export interface IllustrationInput{
+export interface IllustrationInput {
   id?: string;
   title: string;
   description: string;
@@ -29,23 +30,23 @@ export interface IllustrationInput{
   image: File | null;
   exhibition: string;
 }
-export interface IllustrationErrorData{
+export interface IllustrationErrorData {
   title?: string;
   description?: string;
   date_painted?: string;
   image?: string;
 }
 
-export interface User{
+export interface User {
   pk: string;
   username: string;
   email: string;
 }
-export interface UserLogin{
+export interface UserLogin {
   username: string;
   password: string;
 }
-export interface UserRegister{
+export interface UserRegister {
   username: string;
   email: string;
   password1: string;

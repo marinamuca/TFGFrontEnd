@@ -1,8 +1,9 @@
-import { Grid } from '@mui/material';
-import IllustrationCard from './components/IllustrationCard/IllustrationCard';
+import { Grid } from "@mui/material";
+import IllustrationCard from "./components/IllustrationCard/IllustrationCard";
+import React from "react";
 
-interface ListIllustrationsProps{
-    illustrations?: [];
+interface ListIllustrationsProps {
+  illustrations?: [];
 }
 
 const IllustrationList = (props: ListIllustrationsProps) => {
@@ -17,4 +18,4 @@ const IllustrationList = (props: ListIllustrationsProps) => {
   );
 };
 
-export default IllustrationList
+export default React.memo(IllustrationList);

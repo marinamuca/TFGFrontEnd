@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useDimensions } from '../../hooks/appHooks';
+import React from "react";
 
 const Exhibition = () => {
     
@@ -69,4 +70,4 @@ const Exhibition = () => {
     );
 }
 
-export default Exhibition
+export default React.memo(Exhibition)

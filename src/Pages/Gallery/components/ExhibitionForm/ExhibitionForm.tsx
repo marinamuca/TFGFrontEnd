@@ -10,6 +10,8 @@ import {
   useCreateExhibitionsMutation,
   useUpdateExhibitionMutation,
 } from "../../../../domain/api/apiSlice";
+import { useAppSelector } from "../../../../hooks/appHooks";
+import { selectUser } from "../../../../redux/authSlice";
 
 interface ExhibitionForm {
   exhibition?: any;
@@ -17,6 +19,8 @@ interface ExhibitionForm {
 
 const ExhibitionForm = (props: ExhibitionForm) => {
   let [sendExhibition, response] = useCreateExhibitionsMutation();
+  const artist = useAppSelector(selectUser);
+
   if (props.exhibition)
     [sendExhibition, response] = useUpdateExhibitionMutation();
   const [exhibition, setExhibition] = useState<Exhibition>({
@@ -24,6 +28,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
     theme: props.exhibition ? props.exhibition.theme : "",
     room_width: props.exhibition ? props.exhibition.room_width : "",
     room_length: props.exhibition ? props.exhibition.room_length : "",
+    artist: artist.pk,
   });
 
   const [error, setError] = useState<ExhibitionErrorData>({});
@@ -102,4 +107,4 @@ const ExhibitionForm = (props: ExhibitionForm) => {
   );
 };
 
-export default ExhibitionForm;
+export default React.memo(ExhibitionForm);

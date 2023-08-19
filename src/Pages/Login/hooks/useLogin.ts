@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { INDEX_PATH } from "../../../constants";
 import { useLoginMutation } from "../../../domain/api/apiSlice";
 import { LoginErrorData, UserLogin } from "../../../domain/types/types";
 
 const useLogin = () => {
+    const navigate = useNavigate();
     const [login, response] = useLoginMutation();
     const [user, setUser] = useState<UserLogin>();
     const [error, setError] = useState<LoginErrorData>({});
@@ -11,7 +14,7 @@ const useLogin = () => {
         if (response.isError) {
             if('data' in response.error) setError(response.error.data as LoginErrorData); //TODO si error non_field_errors to toast
           } else if (response.isSuccess) {
-            window.location.replace("/");
+            navigate(INDEX_PATH);
           }
       }, [response])
 

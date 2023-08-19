@@ -1,4 +1,3 @@
-import { height } from '@mui/system'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import type { RootState, AppDispatch } from '../store'
 
@@ -6,7 +5,6 @@ import type { RootState, AppDispatch } from '../store'
 type DispatchFunc = () => AppDispatch
 export const useAppDispatch: DispatchFunc = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
 
 export const useDimensions = (width: string, length: string) => {
   let widthFactor = (width == "1") ? 1 : 2;

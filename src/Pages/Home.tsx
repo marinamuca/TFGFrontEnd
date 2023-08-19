@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@mui/material/Button';
 import Exhibitions from '../components/test/Exhibitions'
-import NewExhibitionForm from './Gallery/components/NewExhibitionForm/NewExhibitionForm';
+import ExhibitionForm from './Gallery/components/ExhibitionForm/ExhibitionForm';
 import NewIllustrarionForm from './Exhibition/components/IllustrationForm/IllustrationForm';
 import ExhibitionList from '../components/ExhibitionList/ExhibitionList';
 import { Container } from '@mui/material';
@@ -11,7 +11,7 @@ import { openModal, setContent, setTitle } from '../redux/modalSlice';
 
 const Home = () => {
     const dispatch = useAppDispatch();
-    const modalContent = <NewExhibitionForm/>
+    const modalContent = <ExhibitionForm/>
     const modalillustration = <NewIllustrarionForm id_exhibition={"61"}/>
 
     const handleCreateExhibitionClick = () => {

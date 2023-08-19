@@ -1,11 +1,11 @@
 import React from "react";
 import { useAppDispatch } from '../../../hooks/appHooks';
 import { openModal, setContent, setTitle } from '../../../redux/modalSlice';
-import NewExhibitionForm from '../components/NewExhibitionForm';
+import ExhibitionForm from '../components/ExhibitionForm';
 
 const useGallery = () => {
   const dispatch = useAppDispatch();
-  const modalContent = <NewExhibitionForm />;
+  const modalContent = <ExhibitionForm />;
 
   const handleCreateExhibitionClick = () => {
     dispatch(openModal());

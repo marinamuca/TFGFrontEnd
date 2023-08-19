@@ -9,7 +9,7 @@ import { useDimensions } from '../../hooks/appHooks';
 
 const Exhibition = () => {
     
-    const {handleCreateIlustrationClick, isFetching, isLoading, exhibition} = useExhibition();
+    const {handleCreateIlustrationClick, isFetching, isLoading, exhibition, handleEditClick} = useExhibition();
     
     if (isLoading || isFetching) {
         return <div>Loading...</div>;
@@ -23,7 +23,7 @@ const Exhibition = () => {
           <Typography component="div" variant="h4">
             {exhibition.name}
           </Typography>
-          <Button variant="contained" startIcon={<EditIcon />}>
+          <Button variant="contained" startIcon={<EditIcon />} onClick={handleEditClick}>
             Editar
           </Button>
         </Box>

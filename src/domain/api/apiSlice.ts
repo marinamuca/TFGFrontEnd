@@ -1,10 +1,21 @@
 // Or from '@reduxjs/toolkit/query/react'
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Exhibition } from "../types/types";
+import type { RootState } from "../../store";
 
 export const apiSlice = createApi({
   reducerPath: "API_TFG",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8000/api/",
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
+      console.log(token)
+      if (token != null) {
+        headers.set('Authorization', `Token ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     getExhibitions: builder.query({
       query: () => `exhibition/`,
@@ -23,6 +34,13 @@ export const apiSlice = createApi({
         url: `exhibition/`,
         method: "POST",
         body,
+      }),
+    }),
+    updateExhibition: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `exhibition/${id}/`,
+        method: "PUT",
+        body: body,
       }),
     }),
     getIllustrations: builder.query({
@@ -45,12 +63,28 @@ export const apiSlice = createApi({
     updateIllustration: builder.mutation({
       query: ({ id, body }) => ({
         url: `illustration/${id}/`,
-        method: "PUT",
+        method: "PATCH",
         body: body,
+      }),
+    }),
+    login: builder.mutation({
+      query: (body) => ({
+        url: `auth/login/`,
+        method: "POST",
+        body,
+      }),
+    }),
+    getUserDetail: builder.mutation({
+      query: (body) => ({
+        url: `auth/user/`,
+        method: "GET",
+        body,
       }),
     }),
   }),
 });
+
+export const { login } = apiSlice.endpoints;
 
 export const {
   useGetExhibitionsQuery,
@@ -60,5 +94,8 @@ export const {
   useGetIllustrationsQuery,
   useUpdateIllustrationMutation,
   useDeleteExhibitionMutation,
-  useDeleteIllustrationMutation
+  useDeleteIllustrationMutation,
+  useUpdateExhibitionMutation,
+  useLoginMutation,
+  useGetUserDetailMutation,
 } = apiSlice;

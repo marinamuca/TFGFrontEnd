@@ -1,10 +1,10 @@
-import React from "react"
+import React from "react";
 import ExhibitionList from "../../components/ExhibitionList";
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 import useGallery from "./hooks/useGallery";
 
 const Gallery: React.FC = () => {
-    const { handleCreateExhibitionClick } = useGallery();
+  const { handleCreateExhibitionClick } = useGallery();
 
   return (
     <>

@@ -45,8 +45,23 @@ export interface UserLogin{
   username: string;
   password: string;
 }
+export interface UserRegister{
+  username: string;
+  email: string;
+  password1: string;
+  password2: string;
+  profile_type: string;
+}
 export interface LoginErrorData {
   username?: string;
   password?: string;
+  non_field_errors?: string;
+}
+export interface RegisterErrorData {
+  username?: string;
+  email?: string;
+  password1?: string;
+  password2?: string;
+  profile_type?: string;
   non_field_errors?: string;
 }

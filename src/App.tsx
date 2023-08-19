@@ -17,6 +17,7 @@ import MuiThemeProvider from "./theme/MuiThemeProvider";
 import Layout from "./pages/Layout/Layout";
 import Gallery from "./pages/Gallery";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                   <Route path="/" element={<Gallery />}></Route>
                   <Route path="/Galaxy" element={<Galaxy />}></Route>
                   <Route path="/login" element={<Login />}></Route>
+                  <Route path="/register" element={<Register />}></Route>
                   <Route path="/room/:id" element={<RoomScene />}></Route>
                   <Route
                     path="/gallery"

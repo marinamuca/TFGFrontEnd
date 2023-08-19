@@ -16,7 +16,6 @@ const useLogin = () => {
       }, [response])
 
     const handleSubmit = () => {
-        console.log(user)
         login(user);
     }
     const handleInputChange = ( field: string, value: string ) => {

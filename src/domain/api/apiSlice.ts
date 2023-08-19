@@ -9,9 +9,8 @@ export const apiSlice = createApi({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
-      console.log(token)
-      if (token != null) {
-        headers.set('Authorization', `Token ${token}`);
+      if (token != "") {
+        headers.set("Authorization", `Token ${token}`);
       }
       return headers;
     },
@@ -74,17 +73,23 @@ export const apiSlice = createApi({
         body,
       }),
     }),
-    getUserDetail: builder.mutation({
+    register: builder.mutation({
       query: (body) => ({
+        url: `auth/register/`,
+        method: "POST",
+        body,
+      }),
+    }),
+    getUserDetail: builder.query({
+      query: () => ({
         url: `auth/user/`,
         method: "GET",
-        body,
       }),
     }),
   }),
 });
 
-export const { login } = apiSlice.endpoints;
+export const { login, register, getUserDetail } = apiSlice.endpoints;
 
 export const {
   useGetExhibitionsQuery,
@@ -97,5 +102,6 @@ export const {
   useDeleteIllustrationMutation,
   useUpdateExhibitionMutation,
   useLoginMutation,
-  useGetUserDetailMutation,
+  useRegisterMutation,
+  useGetUserDetailQuery,
 } = apiSlice;

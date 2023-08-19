@@ -10,7 +10,7 @@ const Login: React.FC = () => {
       <TextField
         label="Nombre de usuario"
         sx={{ mb: 3 }}
-        value={user?.username}
+        value={user?.username || ''}
         onChange={(_event) => {handleInputChange('username', _event.target.value)}}
         error={"username" in error}
         helperText={"username" in error ? error.username : null}
@@ -18,7 +18,7 @@ const Login: React.FC = () => {
       <TextField
         label="Contraseña"
         sx={{ mb: 3 }}
-        value={user?.password}
+        value={user?.password || ''}
         onChange={(_event) => {handleInputChange('password', _event.target.value)}}
         type="password"
         error={"password" in error}

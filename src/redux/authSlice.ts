@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import type { User } from "../domain/types/types";
-import { login } from "../domain/api/apiSlice";
-import Cookies from 'js-cookie';
+import { login, getUserDetail } from "../domain/api/apiSlice";
+import Cookies from "js-cookie";
 
 interface AuthState {
   token: string;
@@ -10,7 +10,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: JSON.parse(Cookies.get("session")??"").token ?? ""  ,
+  token: Cookies.get("token")?? "",
+  user: JSON.parse(Cookies.get("user") ?? "{}").user ?? null,
 };
 
 const authSlice = createSlice({
@@ -21,7 +22,8 @@ const authSlice = createSlice({
       state.token = payload.token;
     },
     removeSession: (state) => {
-      Cookies.set("session", "")
+      Cookies.set("token", "");
+      Cookies.set("user", "");
       state = initialState;
     },
   },
@@ -29,12 +31,22 @@ const authSlice = createSlice({
     builder.addMatcher(login.matchFulfilled, (state, { payload: { key } }) => {
       state.token = key;
       Cookies.set(
-        "session",
-        JSON.stringify({
-          token: key,
-        })
-      )
+        "token",
+        key
+      );
     });
+    builder.addMatcher(
+      getUserDetail.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload;
+        Cookies.set(
+          "user",
+          JSON.stringify({
+            user: payload
+          })
+        );
+      }
+    );
   },
 });
 

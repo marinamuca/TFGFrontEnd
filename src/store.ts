@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { apiSlice } from "./domain/api/apiSlice";
 import modalReducer from "./redux/modalSlice";
 import colorPickerReducer from "./redux/colorPickerSlice";
+import toastSlice from "./redux/toastSlice";
 import authSlice from "./redux/authSlice";
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     modal: modalReducer,
     colorPicker: colorPickerReducer,
+    [toastSlice.name]: toastSlice.reducer,
     [authSlice.name]: authSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -10,21 +10,20 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import { useLogoutMutation } from "../../domain/api/apiSlice";
 import { Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_PATH } from "../../constants";
 
 export const APP_BAR_HEIGHT = 65;
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -40,11 +39,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout(null);
+    setAnchorEl(null);
+    navigate(LOGIN_PATH);
   };
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-    console.log(window.location)
+    console.log(window.location);
     // window.location.replace("/profile")
   };
 

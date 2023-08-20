@@ -13,7 +13,7 @@ const useLogin = () => {
   useEffect(() => {
     if (response.isError) {
       if ("data" in response.error)
-        setError(response.error.data as LoginErrorData); //TODO si error non_field_errors to toast
+        setError(response.error.data as LoginErrorData); 
     } else if (response.isSuccess) {
       navigate(INDEX_PATH);
     }

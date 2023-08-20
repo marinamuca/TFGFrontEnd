@@ -1,6 +1,7 @@
 import { Box, Container, Toolbar } from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import InfoToast from "../../components/InfoToast";
 import AppModal from "../../components/Modal";
 import Navbar from "../../components/Navbar";
 import { ROOM_PATH } from "../../constants";
@@ -16,6 +17,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     return (
       <div className="App">
         <AppModal />
+        <InfoToast/>
         <Navbar />
         {children}
       </div>
@@ -25,6 +27,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     <div className="App">
       <AppModal />
       <Navbar />
+      <InfoToast/>
       <Container
         fixed
         maxWidth="md"

@@ -9,7 +9,7 @@ export const apiSlice = createApi({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
-      if (token != "") {
+      if (!!token) {
         headers.set("Authorization", `Token ${token}`);
       }
       return headers;
@@ -80,12 +80,6 @@ export const apiSlice = createApi({
         body,
       }),
     }),
-    getUserDetail: builder.query({
-      query: () => ({
-        url: `auth/user/`,
-        method: "GET",
-      }),
-    }),
     logout: builder.mutation({
       query: () => ({
         url: `auth/logout/`,
@@ -95,7 +89,7 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { login, logout, register, getUserDetail } = apiSlice.endpoints;
+export const { login, logout, register } = apiSlice.endpoints;
 
 export const {
   useGetExhibitionsQuery,
@@ -109,6 +103,5 @@ export const {
   useUpdateExhibitionMutation,
   useLoginMutation,
   useRegisterMutation,
-  useGetUserDetailQuery,
   useLogoutMutation
 } = apiSlice;

@@ -2,53 +2,15 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
-import {
-  Exhibition,
-  ExhibitionErrorData,
-} from "../../../../domain/types/types";
-import {
-  useCreateExhibitionsMutation,
-  useUpdateExhibitionMutation,
-} from "../../../../domain/api/apiSlice";
-import { useAppSelector } from "../../../../hooks/appHooks";
-import { selectUser } from "../../../../redux/authSlice";
+import useExhibitionForm from "./hooks/useExhibitionForm";
 
 interface ExhibitionForm {
   exhibition?: any;
 }
 
 const ExhibitionForm = (props: ExhibitionForm) => {
-  let [sendExhibition, response] = useCreateExhibitionsMutation();
-  const artist = useAppSelector(selectUser);
-
-  if (props.exhibition)
-    [sendExhibition, response] = useUpdateExhibitionMutation();
-  const [exhibition, setExhibition] = useState<Exhibition>({
-    name: props.exhibition ? props.exhibition.name : "",
-    theme: props.exhibition ? props.exhibition.theme : "",
-    room_width: props.exhibition ? props.exhibition.room_width : "",
-    room_length: props.exhibition ? props.exhibition.room_length : "",
-    artist: artist.pk,
-  });
-
-  const [error, setError] = useState<ExhibitionErrorData>({});
-
-  useEffect(() => {
-    if (response.isError) {
-      if ("data" in response.error)
-        setError(response.error.data as ExhibitionErrorData);
-      console.log(error);
-    } else if (response.isSuccess) {
-      window.location.reload();
-    }
-  }, [response]);
-
-  function handleSubmit(event: any) {
-    event.preventDefault();
-    if (props.exhibition)
-      sendExhibition({ id: props.exhibition.id, body: exhibition });
-    else sendExhibition(exhibition);
-  }
+  const { exhibition, setValue, error, handleSubmit, btnLabel } =
+    useExhibitionForm(props.exhibition);
 
   return (
     <FormControl sx={{ m: 3, width: 225 }}>
@@ -58,7 +20,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         sx={{ mb: 3 }}
         value={exhibition.name}
         onChange={(e) => {
-          setExhibition({ ...exhibition, name: e.target.value });
+          setValue("name", e.target.value);
         }}
         fullWidth
         error={"name" in error}
@@ -70,7 +32,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         sx={{ mb: 3 }}
         value={exhibition.theme}
         onChange={(e) => {
-          setExhibition({ ...exhibition, theme: e.target.value });
+          setValue("theme", e.target.value);
         }}
         fullWidth
         error={"theme" in error}
@@ -82,7 +44,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         sx={{ mb: 3 }}
         value={exhibition.room_width}
         onChange={(e) => {
-          setExhibition({ ...exhibition, room_width: e.target.value });
+          setValue("room_width", e.target.value);
         }}
         fullWidth
         error={"room_width" in error}
@@ -94,14 +56,14 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         sx={{ mb: 3 }}
         value={exhibition.room_length}
         onChange={(e) => {
-          setExhibition({ ...exhibition, room_length: e.target.value });
+          setValue("room_length", e.target.value);
         }}
         fullWidth
         error={"room_length" in error}
         helperText={"room_length" in error ? error.room_length : null}
       ></TextField>
       <Button variant="contained" type="submit" onClick={handleSubmit}>
-        Crear
+        {btnLabel}
       </Button>
     </FormControl>
   );

@@ -38,9 +38,10 @@ export interface IllustrationErrorData {
 }
 
 export interface User {
-  pk: string;
+  id: string;
   username: string;
   email: string;
+  profile: string;
 }
 export interface UserLogin {
   username: string;

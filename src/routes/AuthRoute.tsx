@@ -9,7 +9,7 @@ import SessionWrapper from "./components/SessionWrapper";
 const AuthRoute = ({children}: {children: JSX.Element}) => {
   const session = Cookies.get("session");
   const navigate = useNavigate();
-  const token = useAppSelector(selectToken);
+  const token: string = useAppSelector(selectToken);
 
   useEffect(() => {
     if(!token && !session){

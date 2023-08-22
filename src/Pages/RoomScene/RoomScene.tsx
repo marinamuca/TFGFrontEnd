@@ -37,4 +37,4 @@ const RoomScene = () => {
     )
 }
 
-export default RoomScene
+export default React.memo(RoomScene)

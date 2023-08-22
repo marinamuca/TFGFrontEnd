@@ -3,7 +3,7 @@ import { HexColorPicker } from 'react-colorful'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/appHooks'
 import { setColor } from '../../../../redux/colorPickerSlice';
 
-export default function ColorPicker() {
+function ColorPicker() {
   const dispatch = useAppDispatch();
   const { showPicker, color } = useAppSelector((state) => state.colorPicker )
   return (
@@ -12,3 +12,5 @@ export default function ColorPicker() {
     </div>
   )
 }
+
+export default React.memo(ColorPicker)

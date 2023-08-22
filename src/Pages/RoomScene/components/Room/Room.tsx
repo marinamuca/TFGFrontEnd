@@ -1,13 +1,8 @@
 
 import * as THREE from 'three'
-import { Euler, Vector3 } from '@react-three/fiber';
-import { Illustration } from '../../../../domain/types/types';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/appHooks';
-import { closeModal, openModal, setContent, setTitle } from '../../../../redux/modalSlice';
-import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
 import useRoom from './hooks/useRoom';
 import useGenerateRoom from './hooks/useGenerateRoom';
-import DeleteDialog from '../../../../components/DeleteDialog/DeleteDialog';
+import React from 'react';
 
 interface roomProps{
     rows: number;
@@ -32,4 +27,4 @@ function Room(props: roomProps) {
     )
 }
 
-export default Room;
+export default React.memo(Room);

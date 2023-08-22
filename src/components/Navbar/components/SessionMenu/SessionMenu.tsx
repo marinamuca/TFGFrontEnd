@@ -8,7 +8,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import React from "react";
 import useSession from "../hooks/useSession";
-import useMenu from "../hooks/useNavbar";
+import useMenu from "../hooks/useMenu";
 import { LOGIN_PATH, REGISTER_PATH } from "../../../../constants";
 
 const SessionMenu: React.FC = () => {
@@ -19,7 +19,10 @@ const SessionMenu: React.FC = () => {
     anchorEl,
     handleMenuOpen,
     handleProfileClick,
-    handleLoginClick, handleRegisterClick
+    handleLoginClick,
+    handleRegisterClick,
+    loginPath,
+    registerPath,
   } = useMenu(handleLogout);
 
   const renderMenu = (
@@ -42,21 +45,28 @@ const SessionMenu: React.FC = () => {
     </Menu>
   );
 
-  if (!token || !session)
-    return (
-      <>
-        <Button variant="filled" color="secondary" onClick={handleLoginClick} sx={{mr: 2}}>Login</Button>
-        <Button variant="filled" color="secondary"  onClick={handleRegisterClick}>Register</Button>
-      </>
-    );
+  if (!token || !session) {
+    if (loginPath)
+      return (
+        <Button color="inherit" onClick={handleRegisterClick}>
+          Register
+        </Button>
+      );
+    if (registerPath)
+      return (
+        <Button color="inherit" onClick={handleLoginClick}>
+          Login
+        </Button>
+      );
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
-      <IconButton size="large" color="inherit">
+      {/* <IconButton size="large" color="inherit">
         <Badge badgeContent={17} color="secondary">
           <NotificationsIcon />
         </Badge>
-      </IconButton>
+      </IconButton> */}
       <IconButton
         size="large"
         edge="end"

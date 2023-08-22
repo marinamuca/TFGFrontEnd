@@ -16,7 +16,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import React, { useEffect } from "react";
 import { Link } from "@mui/material";
 import useSession from "./components/hooks/useSession";
-import useMenu from "./components/hooks/useNavbar";
+import useMenu from "./components/hooks/useMenu";
 import SessionMenu from "./components/SessionMenu/SessionMenu";
 
 export const APP_BAR_HEIGHT = 65;

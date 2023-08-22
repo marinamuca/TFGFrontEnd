@@ -84,13 +84,13 @@ const Register: React.FC = () => {
           >
             <TextField
               label="Tipo de Cuenta"
-              value={user?.profile_type}
+              value={user?.is_artist}
               onChange={(_event) => {
-                handleInputChange("profile_type", _event.target.value);
+                handleInputChange("is_artist", _event.target.value);
               }}
               select
               error={"profile_type" in error}
-              helperText={"profile_type" in error ? error.profile_type : ""}
+              helperText={"is_artist" in error ? error.is_artist : ""}
             >
               {Object.keys(profileTypes).map((key) => (
                 <MenuItem key={key} value={key}>

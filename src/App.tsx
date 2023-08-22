@@ -5,7 +5,6 @@ import {
   Routes,
 } from "react-router-dom";
 import "./App.css";
-import Galaxy from "./scenes/Galaxy";
 import RoomScene from "./pages/RoomScene/RoomScene";
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -22,6 +21,7 @@ import Gallery from "./pages/Gallery";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthRoute from "./routes/AuthRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -54,6 +54,14 @@ function App() {
                   element={
                     <AuthRoute>
                       <Gallery />
+                    </AuthRoute>
+                  }
+                ></Route>
+                <Route
+                  path="/profile"
+                  element={
+                    <AuthRoute>
+                      <Profile />
                     </AuthRoute>
                   }
                 ></Route>

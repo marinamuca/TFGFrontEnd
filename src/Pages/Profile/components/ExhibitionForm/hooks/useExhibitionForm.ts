@@ -33,7 +33,7 @@ const useExhibitionForm = (exhibitionData?: any) => {
         setError(response.error.data as ExhibitionErrorData);
       console.log(error);
     } else if (response.isSuccess) {
-      window.location.reload();
+      location.reload();
     }
   }, [response]);
 

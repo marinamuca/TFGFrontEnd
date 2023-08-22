@@ -86,6 +86,18 @@ export const apiSlice = createApi({
         method: "POST",
       }),
     }),
+    getUserProfile: builder.query({
+      query: (id) => ({
+        url: `user_profile/${id}/`,
+        method: "GET",
+      }),
+    }),
+    changeProfile: builder.mutation({
+      query: () => ({
+        url: `change_profile/`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
@@ -101,7 +113,9 @@ export const {
   useDeleteExhibitionMutation,
   useDeleteIllustrationMutation,
   useUpdateExhibitionMutation,
+  useGetUserProfileQuery,
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
+  useChangeProfileMutation
 } = apiSlice;

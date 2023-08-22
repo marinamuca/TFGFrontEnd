@@ -52,7 +52,7 @@ export interface UserRegister {
   email: string;
   password1: string;
   password2: string;
-  profile_type: string;
+  is_artist: string;
 }
 export interface LoginErrorData {
   username?: string;
@@ -64,6 +64,6 @@ export interface RegisterErrorData {
   email?: string;
   password1?: string;
   password2?: string;
-  profile_type?: string;
+  is_artist?: string;
   non_field_errors?: string;
 }

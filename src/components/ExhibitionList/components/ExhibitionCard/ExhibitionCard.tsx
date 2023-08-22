@@ -15,7 +15,7 @@ const ExhibitionCard: React.FC<ExhibitionCardProps>= ({exhibition}) => {
     if (responseDelete.isError) {
       console.log(responseDelete.error);
     } else if (responseDelete.isSuccess) {
-      window.location.reload();
+      location.reload();
     }
 
     const buttonStyle = { mr: 1, ml: 1, width: "50%" };

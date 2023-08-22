@@ -24,11 +24,11 @@ const useRoom = (illustrations: any, placed_illustrations: any) => {
 
             updateIllustration({ id: auxFrame.id, body: auxFrame }).then(
               (responseFrame) => {
-                if (responseFrame.data) window.location.reload();
+                if (responseFrame.data) location.reload();
               }
             );
           } else {
-            if (response.data) window.location.reload();
+            if (response.data) location.reload();
           }
         }
       );
@@ -41,7 +41,7 @@ const useRoom = (illustrations: any, placed_illustrations: any) => {
       let auxFrame = (({ image, ...o }) => o)(frame);
       auxFrame.position = NO_POSITION;
       updateIllustration({ id: auxFrame.id, body: auxFrame }).then((response) => {
-        if (response.data) window.location.reload();
+        if (response.data) location.reload();
       })
     },
     []

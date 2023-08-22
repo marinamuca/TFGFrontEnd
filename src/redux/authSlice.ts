@@ -43,6 +43,10 @@ const authSlice = createSlice({
       state.token = payload.token;
       state.user = payload.user;
     },
+    removeSession: (state) => {
+      Cookies.set("session", "");
+    },
+    setLogout: () => initialState,
     setStatus: (state, { payload }: PayloadAction<QueryStatus>) => {
       state.status = payload;
     },
@@ -69,14 +73,11 @@ const authSlice = createSlice({
     builder.addMatcher(login.matchRejected, (state) => {
       state.status = QueryStatus.rejected;
     });
-    builder.addMatcher(logout.matchFulfilled, (state, { payload }) => {
-      Cookies.set("session", "");
-      state = initialState;
-    });
+    builder.addMatcher(logout.matchFulfilled, (state) => initialState);
   },
 });
 
-export const { setSession, setStatus } = authSlice.actions;
+export const { setSession, setStatus, removeSession } = authSlice.actions;
 export const selectSessionStatus = (state: RootState) => state.auth.status;
 export const selectToken = (state: RootState) => state.auth.token;
 export const selectUser = (state: RootState) => state.auth.user;

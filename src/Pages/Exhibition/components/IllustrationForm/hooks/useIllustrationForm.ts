@@ -29,7 +29,7 @@ const useIllustrationForm = (id_exhibition: string, illustrationData?: any) => {
         setError(response.error.data as IllustrationErrorData);
       console.log(error);
     } else if (response.isSuccess) {
-      window.location.reload();
+      location.reload();
     }
   }, [response]);
 

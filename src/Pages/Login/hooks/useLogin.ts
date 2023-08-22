@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { INDEX_PATH } from "../../../constants";
-import { useLoginMutation } from "../../../domain/api/apiSlice";
+import { logout, useLoginMutation } from "../../../domain/api/apiSlice";
 import { LoginErrorData, UserLogin } from "../../../domain/types/types";
+import { useAppDispatch, useAppSelector } from "../../../hooks/appHooks";
+import { removeSession, selectToken } from "../../../redux/authSlice";
 
 const useLogin = () => {
   const navigate = useNavigate();

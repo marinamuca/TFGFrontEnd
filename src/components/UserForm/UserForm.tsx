@@ -1,32 +1,29 @@
 import {
   Button,
   FormControl,
-  Grid,
   MenuItem,
   TextField,
   Tooltip,
-  Typography,
+  Grid,
 } from "@mui/material";
 import React from "react";
-import useRegister from "./hooks/useRegister";
+import useUserForm from "./hooks/useUserForm";
 
-const Register: React.FC = () => {
+interface UserFormProps {
+  userData: any
+}
+
+const UserForm: React.FC<UserFormProps> = ({userData}) => {
   const {
     user,
-    handleSubmit,
     handleInputChange,
+    handleSubmit,
     error,
-    profileTypes,
     profileTypeHelper,
-  } = useRegister();
-
+    profileTypes,
+  } = useUserForm();
   return (
-    <Grid container spacing={3} sx={{ mt: 3 }} justifyContent="center">
-      <Grid item xs={12}>
-        <Typography component="div" variant="h5" textAlign="center">
-          Regístrate
-        </Typography>
-      </Grid>
+    <Grid container spacing={3}  justifyContent="center">
       <Grid item xs={12}>
         <FormControl fullWidth>
           <TextField
@@ -84,13 +81,13 @@ const Register: React.FC = () => {
           >
             <TextField
               label="Tipo de Cuenta"
-              value={user?.profile_type}
+              value={user?.is_artist}
               onChange={(_event) => {
-                handleInputChange("profile_type", _event.target.value);
+                handleInputChange("is_artist", _event.target.value);
               }}
               select
-              error={"profile_type" in error}
-              helperText={"profile_type" in error ? error.profile_type : ""}
+              error={"is_artist" in error}
+              helperText={"is_artist" in error ? error.is_artist : ""}
             >
               {Object.keys(profileTypes).map((key) => (
                 <MenuItem key={key} value={key}>
@@ -115,4 +112,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default React.memo(Register);
+export default UserForm;

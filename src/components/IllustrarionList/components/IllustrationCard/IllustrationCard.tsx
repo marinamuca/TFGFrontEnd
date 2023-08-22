@@ -14,7 +14,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => 
   if (responseDelete.isError) {
     console.log(responseDelete.error);
   } else if (responseDelete.isSuccess) {
-    window.location.reload();
+    location.reload();
   }
 
   return (

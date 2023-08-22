@@ -28,7 +28,6 @@ const useExhibitionCard = (id: string) => {
     dispatch(openModal());
     dispatch(setTitle("¿Seguro que quiere eliminar?"));
     dispatch(setContent(modalContent))
-    console.log(id);
   }, [id]);
 
   return { handleDeleteClick, responseDelete: response };

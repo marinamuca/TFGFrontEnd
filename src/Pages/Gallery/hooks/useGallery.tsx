@@ -1,10 +1,9 @@
 import React from "react";
-import { useAppDispatch } from '../../../hooks/appHooks';
-import { openModal, setContent, setTitle } from '../../../redux/modalSlice';
-import ExhibitionForm from '../components/ExhibitionForm';
+import { useAppDispatch } from "../../../hooks/appHooks";
+import { openModal, setContent, setTitle } from "../../../redux/modalSlice";
+import ExhibitionForm from "../../Profile/components/ExhibitionForm";
 
 const useGallery = () => {
-
   const dispatch = useAppDispatch();
   const modalContent = <ExhibitionForm />;
 

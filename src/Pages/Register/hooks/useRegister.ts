@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_PATH } from "../../../constants";
 import { useRegisterMutation } from "../../../domain/api/apiSlice";
 import { RegisterErrorData, UserRegister } from "../../../domain/types/types";
 
@@ -10,10 +12,11 @@ const useRegister = () => {
   const [register, response] = useRegisterMutation();
   const [user, setUser] = useState<UserRegister>();
   const [error, setError] = useState<RegisterErrorData>({});
+  const navigate = useNavigate();
 
   const profileTypes: profileTypes = {
-    ARTIST: "Artista",
-    VISITOR: "Visitante",
+    true: "Artista",
+    false: "Visitante",
   };
 
   const profileTypeHelper: profileTypes = {
@@ -24,9 +27,9 @@ const useRegister = () => {
   useEffect(() => {
     if (response.isError) {
       if ("data" in response.error)
-        setError(response.error.data as RegisterErrorData); //TODO si error non_field_errors to toast
+        setError(response.error.data as RegisterErrorData);
     } else if (response.isSuccess) {
-      window.location.replace("/login");
+      navigate(LOGIN_PATH);
     }
   }, [response]);
 

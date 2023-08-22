@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useGetExhibitionByIDQuery } from "../../../domain/api/apiSlice";
 import { useAppDispatch, useDimensions } from "../../../hooks/appHooks";
 import { openModal, setContent, setTitle } from "../../../redux/modalSlice";
-import ExhibitionForm from "../../Gallery/components/ExhibitionForm";
+import ExhibitionForm from "../../Profile/components/ExhibitionForm";
 import IllustrationForm from "../components/IllustrationForm/IllustrationForm";
 
 type params = {

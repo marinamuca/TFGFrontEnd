@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import type { User } from "../domain/types/types";
-import { login, logout } from "../domain/api/apiSlice";
+import { changeProfile, login, logout } from "../domain/api/apiSlice";
 import Cookies from "js-cookie";
 import { QueryStatus } from "@reduxjs/toolkit/dist/query";
 
@@ -74,6 +74,13 @@ const authSlice = createSlice({
       state.status = QueryStatus.rejected;
     });
     builder.addMatcher(logout.matchFulfilled, (state) => initialState);
+    builder.addMatcher(changeProfile.matchFulfilled, (state) => {
+
+      // let newUser = {...state.user}
+      // newUser.profile_data!.is_artist = !state.user!.profile_data.is_artist
+      state.user!.profile_data.is_artist = !state.user!.profile_data.is_artist
+      console.log(state.user)
+    });
   },
 });
 

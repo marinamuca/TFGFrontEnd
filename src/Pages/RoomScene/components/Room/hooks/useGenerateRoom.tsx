@@ -1,13 +1,27 @@
-import { Avatar, Container, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
+import {
+  Avatar,
+  Container,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import { Euler, Vector3 } from "@react-three/fiber";
 import React, { useCallback } from "react";
-import * as THREE from 'three'
-import DeleteDialog from '../../../../../components/DeleteDialog/DeleteDialog';
+import * as THREE from "three";
+import DeleteDialog from "../../../../../components/DeleteDialog/DeleteDialog";
 import { NO_POSITION, TILE_SIZE } from "../../../../../constants";
 import { Illustration } from "../../../../../domain/types/types";
-import { useAppDispatch } from "../../../../../hooks/appHooks";
+import { useAppDispatch, useAppSelector } from "../../../../../hooks/appHooks";
+import { selectUserID } from "../../../../../redux/authSlice";
 import { showPicker } from "../../../../../redux/colorPickerSlice";
-import { openModal, closeModal, setContent, setTitle } from "../../../../../redux/modalSlice";
+import {
+  openModal,
+  closeModal,
+  setContent,
+  setTitle,
+} from "../../../../../redux/modalSlice";
 import { RoomCell, CellType, EdgeType } from "../../RoomCell";
 
 const useGenerateRoom = (
@@ -16,12 +30,14 @@ const useGenerateRoom = (
   illustrations: any,
   handleFrameChange: any,
   handleDeleteFrame: any,
-  color: string
+  color: string,
+  artist: string
 ) => {
   let placed_illustrations = illustrations.filter(
     (illustration: any) => illustration.position > -1
   );
   const dispatch = useAppDispatch();
+  const userID = useAppSelector(selectUserID);
 
   const checkCorner = useCallback(
     (i: number, j: number) => {
@@ -81,30 +97,50 @@ const useGenerateRoom = (
     [placed_illustrations]
   );
 
-  const frameClick = useCallback((frame: Illustration) => {
-    dispatch(openModal());
-    dispatch(setTitle("Modificar Marco"));
-    dispatch(setContent(<Container>
-      <List>
-        {illustrations.map((illustration: any) => {
-          return (
-            <ListItemButton
-            key={illustration.id}
-            onClick={(e) => {
-              handleFrameChange(illustration, frame);
-            }}
-            >
-              <ListItemAvatar>
-                <Avatar src={illustration.image} variant="square" />
-              </ListItemAvatar>
-              <ListItemText primary={illustration.title} />
-            </ListItemButton>
-          );
-        })}
-      </List>
-      {frame.image? <DeleteDialog handleDeleteClick={() => {handleDeleteFrame(frame)}} handleCancelClick={() => {dispatch(closeModal())}}/> : ""}
-    </Container>))
-  }, [illustrations]);
+  const frameClick = useCallback(
+    (frame: Illustration) => {
+      if (artist == userID) {
+        dispatch(openModal());
+        dispatch(setTitle("Modificar Marco"));
+        dispatch(
+          setContent(
+            <Container>
+              <List>
+                {illustrations.map((illustration: any) => {
+                  return (
+                    <ListItemButton
+                      key={illustration.id}
+                      onClick={(e) => {
+                        handleFrameChange(illustration, frame);
+                      }}
+                    >
+                      <ListItemAvatar>
+                        <Avatar src={illustration.image} variant="square" />
+                      </ListItemAvatar>
+                      <ListItemText primary={illustration.title} />
+                    </ListItemButton>
+                  );
+                })}
+              </List>
+              {frame.image ? (
+                <DeleteDialog
+                  handleDeleteClick={() => {
+                    handleDeleteFrame(frame);
+                  }}
+                  handleCancelClick={() => {
+                    dispatch(closeModal());
+                  }}
+                />
+              ) : (
+                ""
+              )}
+            </Container>
+          )
+        );
+      }
+    },
+    [illustrations]
+  );
 
   const generateRoom = useCallback(() => {
     const floorWidth = TILE_SIZE;
@@ -147,7 +183,7 @@ const useGenerateRoom = (
               position: position,
               rotation: rotation,
               onClick: (e) => {
-                dispatch(showPicker())
+                dispatch(showPicker());
               },
             }}
             handleFrameClick={frameClick}

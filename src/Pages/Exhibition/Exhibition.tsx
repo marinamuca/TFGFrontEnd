@@ -15,6 +15,7 @@ const Exhibition = () => {
     isLoading,
     exhibition,
     handleEditClick,
+    userID,
   } = useExhibition();
 
   if (isLoading || isFetching) {
@@ -32,13 +33,17 @@ const Exhibition = () => {
         <Typography component="div" variant="h4">
           {exhibition.name}
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          onClick={handleEditClick}
-        >
-          Editar
-        </Button>
+        {userID == exhibition.artist ? (
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={handleEditClick}
+          >
+            Editar
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
       <Box display="flex" sx={{ mt: 1 }}>
         <Typography
@@ -70,18 +75,22 @@ const Exhibition = () => {
           Ilustraciones ({exhibition.illustrations.length}/
           {maxIllustrations.max})
         </Typography>
-        <Button
-          sx={{ mt: 1 }}
-          startIcon={<AddCircleIcon />}
-          variant="contained"
-          onClick={handleCreateIlustrationClick}
-          disabled={exhibition.illustrations.length >= maxIllustrations.max}
-        >
-          Nueva Ilustración
-        </Button>
+        {userID == exhibition.artist ? (
+          <Button
+            sx={{ mt: 1 }}
+            startIcon={<AddCircleIcon />}
+            variant="contained"
+            onClick={handleCreateIlustrationClick}
+            disabled={exhibition.illustrations.length >= maxIllustrations.max}
+          >
+            Nueva Ilustración
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
       <Box sx={{ maxHeight: "100% !important", overflow: "auto" }}>
-        <IllustrationList illustrations={exhibition.illustrations} />
+        <IllustrationList illustrations={exhibition.illustrations} artist={exhibition.artist} />
       </Box>
     </Container>
   );

@@ -9,7 +9,7 @@ import ExhibitionList from "../../components/ExhibitionList";
 const Profile: React.FC = () => {
   const {
     user,
-    userProfile,
+    selfProfile,
     isLoading,
     isFetching,
     handleCreateExhibitionClick,
@@ -26,9 +26,14 @@ const Profile: React.FC = () => {
         <Typography component="div" variant="h4">
           {user?.username}
         </Typography>
-        <Button startIcon={<EditIcon />} onClick={handleChangeProfileType}>
-          Cambiar a perfil de {userProfile.is_artist ? "Visitante" : "Artista"}
-        </Button>
+        {selfProfile ? (
+          <Button startIcon={<EditIcon />} onClick={handleChangeProfileType}>
+            Cambiar a perfil de{" "}
+            {user?.profile_data.is_artist ? "Visitante" : "Artista"}
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
       <Box display="flex" sx={{ mt: 1 }}>
         <Typography
@@ -37,29 +42,37 @@ const Profile: React.FC = () => {
           color="grey"
           fontWeight={400}
         >
-          {userProfile.is_artist ? "Artista" : "Visitante"}
+          {user?.profile_data.is_artist ? "Artista" : "Visitante"}
         </Typography>
       </Box>
-      <Box display="flex" sx={{ mt: 1 }}>
-        <Typography component="div" variant="subtitle1" fontWeight={400}>
-          {user?.email}
-        </Typography>
-      </Box>
+      {selfProfile ? (
+        <Box display="flex" sx={{ mt: 1 }}>
+          <Typography component="div" variant="subtitle1" fontWeight={400}>
+            {user?.email}
+          </Typography>
+        </Box>
+      ) : (
+        ""
+      )}
       <Box display="flex" justifyContent="space-between" sx={{ mt: 2, mb: 1 }}>
         <Typography component="div" variant="h4">
           Exposiciones
         </Typography>
-        <Button
-          sx={{ mt: 1 }}
-          startIcon={<AddCircleIcon />}
-          variant="contained"
-          onClick={handleCreateExhibitionClick}
-        >
-          Nueva Exposición
-        </Button>
+        {selfProfile && user?.profile_data.is_artist ? (
+          <Button
+            sx={{ mt: 1 }}
+            startIcon={<AddCircleIcon />}
+            variant="contained"
+            onClick={handleCreateExhibitionClick}
+          >
+            Nueva Exposición
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
       <Box sx={{ maxHeight: "100% !important", overflow: "auto" }}>
-        <ExhibitionList exhibitions={userProfile.exhibitions} />
+        <ExhibitionList exhibitions={user.profile_data.exhibitions} />
       </Box>
     </Container>
   );

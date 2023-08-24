@@ -38,7 +38,7 @@ export const apiSlice = createApi({
     updateExhibition: builder.mutation({
       query: ({ id, body }) => ({
         url: `exhibition/${id}/`,
-        method: "PUT",
+        method: "PATCH",
         body: body,
       }),
     }),
@@ -98,10 +98,16 @@ export const apiSlice = createApi({
         method: "PATCH",
       }),
     }),
+    getUser: builder.query({
+      query: (id) => ({
+        url: `auth/user/${id}/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { login, logout, register } = apiSlice.endpoints;
+export const { login, logout, register, changeProfile } = apiSlice.endpoints;
 
 export const {
   useGetExhibitionsQuery,
@@ -113,9 +119,11 @@ export const {
   useDeleteExhibitionMutation,
   useDeleteIllustrationMutation,
   useUpdateExhibitionMutation,
-  useGetUserProfileQuery,
+  // useGetUserProfileQuery,
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useChangeProfileMutation
+  useChangeProfileMutation,
+  useLazyGetUserQuery,
+  useLazyGetUserProfileQuery
 } = apiSlice;

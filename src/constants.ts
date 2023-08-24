@@ -3,6 +3,7 @@ export const LOGIN_PATH = "/login";
 export const REGISTER_PATH = "/register"
 export const INDEX_PATH = "/";
 export const PROFILE_PATH = "/profile"
+export const EXHIBITION_PATH = "/exhibition"
 
 export const TILE_SIZE = 2;
 export const NO_POSITION = -1;

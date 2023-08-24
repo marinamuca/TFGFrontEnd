@@ -1,11 +1,17 @@
 import React from "react";
+import { useGetExhibitionsQuery } from "../../../domain/api/apiSlice";
 import { useAppDispatch } from "../../../hooks/appHooks";
 import { openModal, setContent, setTitle } from "../../../redux/modalSlice";
 import ExhibitionForm from "../../Profile/components/ExhibitionForm";
 
-const useGallery = () => {
+const useHome = () => {
   const dispatch = useAppDispatch();
   const modalContent = <ExhibitionForm />;
+  const {
+    data: exhibitions,
+    isLoading,
+    isFetching,
+  } = useGetExhibitionsQuery({});
 
   const handleCreateExhibitionClick = () => {
     dispatch(openModal());
@@ -13,7 +19,7 @@ const useGallery = () => {
     dispatch(setContent(modalContent));
   };
 
-  return { handleCreateExhibitionClick };
+  return { handleCreateExhibitionClick, isLoading, isFetching, exhibitions };
 };
 
-export default useGallery;
+export default useHome;

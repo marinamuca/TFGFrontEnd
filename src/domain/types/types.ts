@@ -37,11 +37,17 @@ export interface IllustrationErrorData {
   image?: string;
 }
 
+export interface ProfileData{
+  id: string;
+  is_artist: boolean;
+  exhibitions: Exhibition[];
+}
+
 export interface User {
   id: string;
   username: string;
   email: string;
-  profile: string;
+  profile_data: ProfileData;
 }
 export interface UserLogin {
   username: string;

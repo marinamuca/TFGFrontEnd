@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/appHooks'
@@ -9,6 +10,7 @@ function ColorPicker() {
   return (
     <div style={{display: showPicker? "block":"none"}}>
         <HexColorPicker className='picker' color = {color} onChange={(color) => (dispatch(setColor(color)) )}/>
+        <span className="select">Guardar</span> 
     </div>
   )
 }

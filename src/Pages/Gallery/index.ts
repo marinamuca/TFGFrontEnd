@@ -1,2 +1,2 @@
-import Gallery from "./Gallery";
-export default Gallery;
+import Home from "./Home";
+export default Home;

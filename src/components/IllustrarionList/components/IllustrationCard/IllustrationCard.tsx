@@ -1,15 +1,32 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import useIllustrationCard from './hooks/useIllustrationCard';
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import useIllustrationCard from "./hooks/useIllustrationCard";
 
 interface IllustrationCardProps {
-    illustration: any
+  illustration: any;
+  artist?: string;
 }
 
-const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => {
+const IllustrationCard: React.FC<IllustrationCardProps> = ({
+  illustration, artist
+}) => {
   const placed = illustration.position > -1;
-  const {handleDeleteClick, responseDelete, handleClick, handleEditClick} = useIllustrationCard(illustration, illustration.image);
+  const {
+    handleDeleteClick,
+    responseDelete,
+    handleClick,
+    handleEditClick,
+    userID,
+  } = useIllustrationCard(illustration, illustration.image);
 
   if (responseDelete.isError) {
     console.log(responseDelete.error);
@@ -45,28 +62,32 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ illustration }) => 
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button
-          size="small"
-          variant="outlined"
-          color="info"
-          sx={{ mr: 1, ml: 1, width: "45%" }}
-          startIcon={<EditIcon />}
-          onClick={handleEditClick}
-        >
-          Editar
-        </Button>
-        <Button
-          size="small"
-          variant="contained"
-          color="error"
-          sx={{ ml: 1, mr: 1, width: "55%" }}
-          startIcon={<DeleteIcon />}
-          onClick={handleDeleteClick}
-        >
-          Eliminar
-        </Button>
-      </CardActions>
+      {userID == artist ? (
+        <CardActions>
+          <Button
+            size="small"
+            variant="outlined"
+            color="info"
+            sx={{ mr: 1, ml: 1, width: "45%" }}
+            startIcon={<EditIcon />}
+            onClick={handleEditClick}
+          >
+            Editar
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            color="error"
+            sx={{ ml: 1, mr: 1, width: "55%" }}
+            startIcon={<DeleteIcon />}
+            onClick={handleDeleteClick}
+          >
+            Eliminar
+          </Button>
+        </CardActions>
+      ) : (
+        ""
+      )}
     </Card>
   );
 };

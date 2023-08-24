@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DeleteDialog from "../../../components/DeleteDialog/DeleteDialog";
-import { PROFILE_PATH } from "../../../constants";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useChangeProfileMutation,
-  useGetUserProfileQuery,
+  useLazyGetUserProfileQuery,
+  useLazyGetUserQuery,
 } from "../../../domain/api/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/appHooks";
 import { selectUser } from "../../../redux/authSlice";
@@ -17,27 +16,49 @@ import {
 import ConfirmChangeDialog from "../components/ConfirmDialog/ConfirmChangeDialog";
 import ExhibitionForm from "../components/ExhibitionForm";
 
+type params = {
+  id: string;
+};
+
 const useProfile = () => {
+  const { id } = useParams<params>();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const currentUser = useAppSelector(selectUser);
   const modalContentNewExibition = <ExhibitionForm />;
-  const [changeProfile, response] = useChangeProfileMutation();
-  const navigate = useNavigate();
+  const [changeProfile, changeResponse] = useChangeProfileMutation();
+  const [isLoading, setIsLoading] = useState(true); 
+  const [user, setUser] = useState(currentUser);
+  const [selfProfile, setSelfProfile] = useState(false);
+
+  const [getUser, { data, isFetching, isSuccess: isSuccessUser }] =
+    useLazyGetUserQuery();
+
+  useEffect(() => {
+    if (id) {
+      getUser(id);
+      setSelfProfile(false)
+    } else {
+      setSelfProfile(true)
+      getUser(currentUser?.id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (isSuccessUser) {
+      setUser(data);
+      setIsLoading(false);
+    }
+  }, [data]);
 
   const handleCreateExhibitionClick = () => {
+    console.log(user);
     dispatch(openModal());
     dispatch(setTitle("Crear Exposición"));
     dispatch(setContent(modalContentNewExibition));
   };
 
-  const {
-    data: userProfile,
-    isLoading,
-    isFetching,
-    isSuccess,
-  } = useGetUserProfileQuery(user?.profile);
-
   const handleChangeProfileType = useCallback(() => {
+    console.log(user)
     dispatch(openModal());
     dispatch(setTitle("¿Seguro que quiere cambiar el perfil?"));
     dispatch(
@@ -51,17 +72,17 @@ const useProfile = () => {
               location.reload();
             });
           }}
-          isArtist={userProfile.is_artist}
+          isArtist={user?.profile_data.is_artist!}
         />
       )
     );
-  }, [userProfile, isSuccess]);
+  }, [user]);
 
   return {
     user,
+    selfProfile,
     isLoading,
     isFetching,
-    userProfile,
     handleCreateExhibitionClick,
     handleChangeProfileType,
   };

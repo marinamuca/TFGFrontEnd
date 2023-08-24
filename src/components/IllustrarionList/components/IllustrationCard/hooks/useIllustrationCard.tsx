@@ -2,8 +2,7 @@
 import React, { useCallback } from "react";
 import { useDeleteIllustrationMutation } from "../../../../../domain/api/apiSlice";
 import DeleteDialog from "../../../../DeleteDialog/DeleteDialog";
-import { useAppDispatch } from "../../../../../hooks/appHooks";
-import Box from '@mui/material/Box';
+import { useAppDispatch, useAppSelector } from "../../../../../hooks/appHooks";
 import {
   openModal,
   setContent,
@@ -11,9 +10,11 @@ import {
   closeModal,
 } from "../../../../../redux/modalSlice";
 import IllustrationForm from "../../../../../pages/Exhibition/components/IllustrationForm";
+import { selectUserID } from "../../../../../redux/authSlice";
 
 const useIllustrationCard = (illustration: any, image: string) => {
   const dispatch = useAppDispatch();
+  const userID = useAppSelector(selectUserID)
   const [deleteIllustration, response] = useDeleteIllustrationMutation();
   const modalContent = (
     <DeleteDialog
@@ -44,7 +45,7 @@ const useIllustrationCard = (illustration: any, image: string) => {
     dispatch(setContent(<IllustrationForm id_exhibition={illustration.exhibition} illustration={illustration}></IllustrationForm>))
   }, [illustration]);
 
-  return { handleDeleteClick, responseDelete: response, handleClick: handleIllustrationClick, handleEditClick};
+  return { handleDeleteClick, responseDelete: response, handleClick: handleIllustrationClick, handleEditClick, userID};
 };
 
 export default useIllustrationCard;

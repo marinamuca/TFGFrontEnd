@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useGetExhibitionByIDQuery } from "../../../domain/api/apiSlice";
-import { useAppDispatch, useDimensions } from "../../../hooks/appHooks";
+import { useAppDispatch, useAppSelector, useDimensions } from "../../../hooks/appHooks";
+import { selectUserID } from "../../../redux/authSlice";
 import { openModal, setContent, setTitle } from "../../../redux/modalSlice";
 import ExhibitionForm from "../../Profile/components/ExhibitionForm";
 import IllustrationForm from "../components/IllustrationForm/IllustrationForm";
@@ -13,6 +14,7 @@ type params = {
 const useExhibitionCard = () => {
   const { id } = useParams<params>();
   const dispatch = useAppDispatch();
+  const userID = useAppSelector(selectUserID);
   const {
     data: exhibition,
     isLoading,
@@ -51,6 +53,7 @@ const useExhibitionCard = () => {
     isLoading,
     isFetching,
     maxIllustrations,
+    userID,
   };
 };
 export default useExhibitionCard;

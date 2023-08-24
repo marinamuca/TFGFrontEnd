@@ -17,7 +17,7 @@ import "@fontsource/roboto/700.css";
 import Exhibition from "./pages/Exhibition/Exhibition";
 import MuiThemeProvider from "./theme/MuiThemeProvider";
 import Layout from "./pages/Layout/Layout";
-import Gallery from "./pages/Gallery";
+import Home from "./pages/Gallery";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthRoute from "./routes/AuthRoute";
@@ -35,7 +35,7 @@ function App() {
                   path="/"
                   element={
                     <AuthRoute>
-                      <Gallery />
+                      <Home />
                     </AuthRoute>
                   }
                 ></Route>
@@ -53,12 +53,12 @@ function App() {
                   path="/gallery"
                   element={
                     <AuthRoute>
-                      <Gallery />
+                      <Home />
                     </AuthRoute>
                   }
                 ></Route>
                 <Route
-                  path="/profile"
+                  path="/profile/:id?"
                   element={
                     <AuthRoute>
                       <Profile />
@@ -73,7 +73,7 @@ function App() {
                     </AuthRoute>
                   }
                 ></Route>
-                
+
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/register" element={<Register />}></Route>
               </Routes>

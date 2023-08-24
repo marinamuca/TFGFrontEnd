@@ -1,30 +1,38 @@
+import * as THREE from "three";
+import useRoom from "./hooks/useRoom";
+import useGenerateRoom from "./hooks/useGenerateRoom";
+import React from "react";
 
-import * as THREE from 'three'
-import useRoom from './hooks/useRoom';
-import useGenerateRoom from './hooks/useGenerateRoom';
-import React from 'react';
-
-interface roomProps{
-    rows: number;
-    cols: number;
-    illustrations: any;
-    materialSuelo?: THREE.Material;
-    materialPared?: THREE.Material;
+interface roomProps {
+  rows: number;
+  cols: number;
+  illustrations: any;
+  artist: string;
+  materialSuelo?: THREE.Material;
+  materialPared?: THREE.Material;
 }
 
 function Room(props: roomProps) {
-    let placed_illustrations = props.illustrations.filter( (illustration: any) => illustration.position > -1 )
+  let placed_illustrations = props.illustrations.filter(
+    (illustration: any) => illustration.position > -1
+  );
 
-    const { handleFrameChange, handleDeleteFrame, color} = useRoom(props.illustrations, placed_illustrations);
-      
-    const { generateRoom } = useGenerateRoom(props.rows, props.cols, props.illustrations, handleFrameChange, handleDeleteFrame, color);
-   
+  const { handleFrameChange, handleDeleteFrame, color } = useRoom(
+    props.illustrations,
+    placed_illustrations
+  );
 
-    return (
-        <group>
-            {...generateRoom()}
-        </group>
-    )
+  const { generateRoom } = useGenerateRoom(
+    props.rows,
+    props.cols,
+    props.illustrations,
+    handleFrameChange,
+    handleDeleteFrame,
+    color,
+    props.artist
+  );
+
+  return <group>{...generateRoom()}</group>;
 }
 
 export default React.memo(Room);

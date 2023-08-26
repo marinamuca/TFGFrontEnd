@@ -1,22 +1,10 @@
 // import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import { MdAccountCircle } from "react-icons/md";
-import { AiOutlineMenu } from "react-icons/ai";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import React, { useEffect } from "react";
 import { Link } from "@mui/material";
-import useSession from "./components/hooks/useSession";
-import useMenu from "./components/hooks/useMenu";
 import SessionMenu from "./components/SessionMenu/SessionMenu";
 
 export const APP_BAR_HEIGHT = 65;
@@ -33,8 +21,6 @@ const Navbar = () => {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <SessionMenu />
-          {/* <Button variant="filled">Login</Button>
-          <Button variant="filled">Register</Button> */}
         </Toolbar>
       </AppBar>
     </>

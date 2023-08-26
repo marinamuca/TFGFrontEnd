@@ -1,17 +1,16 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import React from "react";
 import useSession from "../hooks/useSession";
 import useMenu from "../hooks/useMenu";
-import { LOGIN_PATH, REGISTER_PATH } from "../../../../constants";
+import { useTranslation } from "react-i18next";
 
 const SessionMenu: React.FC = () => {
+  const {t, i18n} = useTranslation(["auth"]);
   const { handleLogout, token, session } = useSession();
   const {
     handleLogoutClick,
@@ -40,8 +39,8 @@ const SessionMenu: React.FC = () => {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleProfileClick}>Perfil</MenuItem>
-      <MenuItem onClick={handleLogoutClick}>Cerrar Sesión</MenuItem>
+      <MenuItem onClick={handleProfileClick}>{t('profile')}</MenuItem>
+      <MenuItem onClick={handleLogoutClick}>{t('logout')}</MenuItem>
     </Menu>
   );
 
@@ -49,24 +48,19 @@ const SessionMenu: React.FC = () => {
     if (loginPath)
       return (
         <Button color="inherit" onClick={handleRegisterClick}>
-          Register
+          {t('registerLabel')}
         </Button>
       );
     if (registerPath)
       return (
         <Button color="inherit" onClick={handleLoginClick}>
-          Login
+          {t('loginLabel')}
         </Button>
       );
   }
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <IconButton size="large" color="inherit">
-        <Badge badgeContent={17} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton> */}
       <IconButton
         size="large"
         edge="end"

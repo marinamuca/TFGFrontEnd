@@ -3,8 +3,10 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 import React from "react";
 import useInfoToast from "./hooks/useInfoToast";
+import { useTranslation } from "react-i18next";
 
 const InfoToast = () => {
+  const {t} = useTranslation(['notifications']);
   const {toast, handleClose} = useInfoToast();
 
   return (
@@ -13,7 +15,7 @@ const InfoToast = () => {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <MuiAlert severity={toast.severity} variant="filled" onClose={handleClose}>
-        {toast.label}
+        {t(toast.label)}
       </MuiAlert>
     </Snackbar>
   );

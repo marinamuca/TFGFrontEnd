@@ -15,13 +15,8 @@ const useRegister = () => {
   const navigate = useNavigate();
 
   const profileTypes: profileTypes = {
-    true: "Artista",
-    false: "Visitante",
-  };
-
-  const profileTypeHelper: profileTypes = {
-    ARTIST: "Artista: Permite crear tus propias exposiciones.",
-    VISITOR: "Visitante: Sólo para visitar las exposiciones de otros.",
+    true: "artist",
+    false: "visitor",
   };
 
   useEffect(() => {
@@ -47,7 +42,6 @@ const useRegister = () => {
     handleInputChange,
     error,
     profileTypes,
-    profileTypeHelper,
   };
 };
 

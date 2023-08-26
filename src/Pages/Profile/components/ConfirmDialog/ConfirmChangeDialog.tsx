@@ -14,7 +14,7 @@ const ConfirmChangeDialog: React.FC<ConfirmDialogProps> = ({
 }) => {
   return (
     <>
-      <Typography component="div" variant="subtitle1" maxWidth={350} textAlign="center">
+      <Typography component="div" variant="subtitle1" textAlign="center">
         {isArtist
           ? "Esta acción borrará todas las exposiciones e ilustraciones que haya creado. "
           : ""}

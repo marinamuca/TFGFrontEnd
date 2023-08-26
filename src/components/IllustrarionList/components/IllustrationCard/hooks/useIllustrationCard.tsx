@@ -29,7 +29,7 @@ const useIllustrationCard = (illustration: any, image: string) => {
 
   const handleDeleteClick = useCallback(() => {
     dispatch(openModal());
-    dispatch(setTitle("¿Seguro que quiere eliminar?"));
+    dispatch(setTitle("confirmDelete"));
     dispatch(setContent(modalContent))
   }, [illustration]);
   
@@ -40,7 +40,7 @@ const useIllustrationCard = (illustration: any, image: string) => {
   
   const handleEditClick = useCallback(() => {
     dispatch(openModal());
-    dispatch(setTitle("Editar Ilustracion"));
+    dispatch(setTitle('updateIllustration'));
     console.log(illustration)
     dispatch(setContent(<IllustrationForm id_exhibition={illustration.exhibition} illustration={illustration}></IllustrationForm>))
   }, [illustration]);

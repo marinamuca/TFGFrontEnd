@@ -101,7 +101,7 @@ const useGenerateRoom = (
     (frame: Illustration) => {
       if (artist == userID) {
         dispatch(openModal());
-        dispatch(setTitle("Modificar Marco"));
+        dispatch(setTitle("updateFrame"));
         dispatch(
           setContent(
             <Container>

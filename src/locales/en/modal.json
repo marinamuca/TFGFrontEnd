@@ -1,0 +1,9 @@
+{
+  "confirmDelete": "Are you sure you want to delete?",
+  "updateIllustration": "Update Illustration",
+  "createExhibition": "Create Exhibition", 
+  "createillustration": "Create Illustration", 
+  "updateExhibition": "Update Exhibition",
+  "changeProfile": "Are you sure you want to change your profile type?", 
+  "updateFrame": "Update frame"
+}

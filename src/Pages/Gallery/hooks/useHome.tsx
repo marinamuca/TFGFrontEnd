@@ -15,7 +15,7 @@ const useHome = () => {
 
   const handleCreateExhibitionClick = () => {
     dispatch(openModal());
-    dispatch(setTitle("Crear Exposición"));
+    dispatch(setTitle("createExhibition"));
     dispatch(setContent(modalContent));
   };
 

@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { useAppSelector, useAppDispatch } from "../../hooks/appHooks";
 import { closeModal } from "../../redux/modalSlice";
 import "./Modal.css";
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,6 +21,7 @@ const style = {
 };
 
 export default function AppModal() {
+  const { t } = useTranslation(["modal"]);
   const dispatch = useAppDispatch();
   const { isOpen, title, content } = useAppSelector((state) => state.modal);
   return (
@@ -34,7 +36,7 @@ export default function AppModal() {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {title}
+          {t(title)}
         </Typography>
         {content}
       </Box>

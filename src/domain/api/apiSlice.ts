@@ -119,11 +119,11 @@ export const {
   useDeleteExhibitionMutation,
   useDeleteIllustrationMutation,
   useUpdateExhibitionMutation,
-  // useGetUserProfileQuery,
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
   useChangeProfileMutation,
   useLazyGetUserQuery,
+  useGetUserQuery,
   useLazyGetUserProfileQuery
 } = apiSlice;

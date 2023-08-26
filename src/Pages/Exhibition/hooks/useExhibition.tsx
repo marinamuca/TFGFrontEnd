@@ -32,7 +32,7 @@ const useExhibitionCard = () => {
 
   const handleCreateIlustrationClick = () => {
     dispatch(openModal());
-    dispatch(setTitle("Crear Ilustración"));
+    dispatch(setTitle("createIllustration"));
     dispatch(
       setContent(
         <IllustrationForm id_exhibition={exhibition.id}></IllustrationForm>
@@ -42,7 +42,7 @@ const useExhibitionCard = () => {
 
   const handleEditClick = () => {
     dispatch(openModal());
-    dispatch(setTitle("Editar Exposición"));
+    dispatch(setTitle("updateExhibition"));
     dispatch(setContent(<ExhibitionForm exhibition={exhibition} />));
   };
 

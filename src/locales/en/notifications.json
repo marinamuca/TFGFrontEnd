@@ -1,0 +1,6 @@
+{
+  "registerSuccess": "Account created successfully",
+  "logoutSuccess": "Logged out successfully",
+  "logoutError": "Error while logging out",
+  "loginSuccess": "Logged in successfully"
+}

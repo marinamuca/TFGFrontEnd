@@ -53,14 +53,14 @@ const useProfile = () => {
   const handleCreateExhibitionClick = () => {
     console.log(user);
     dispatch(openModal());
-    dispatch(setTitle("Crear Exposición"));
+    dispatch(setTitle("createExhibition"));
     dispatch(setContent(modalContentNewExibition));
   };
 
   const handleChangeProfileType = useCallback(() => {
     console.log(user)
     dispatch(openModal());
-    dispatch(setTitle("¿Seguro que quiere cambiar el perfil?"));
+    dispatch(setTitle("changeProfile"));
     dispatch(
       setContent(
         <ConfirmChangeDialog

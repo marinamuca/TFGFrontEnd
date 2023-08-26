@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface DeleteDialogProps {
   handleCancelClick: Function;
@@ -10,6 +11,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   handleCancelClick,
   handleDeleteClick,
 }) => {
+  const {t} = useTranslation(["common"]);
   return (
     <Box
       sx={{
@@ -26,7 +28,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           handleCancelClick();
         }}
       >
-        Cancelar
+        {t("cancel")}
       </Button>
       <Button
         variant="contained"
@@ -36,7 +38,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           handleDeleteClick();
         }}
       >
-        Eliminar
+        {t('delete')}
       </Button>
     </Box>
   );

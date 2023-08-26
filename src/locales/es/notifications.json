@@ -1,0 +1,6 @@
+{
+  "registerSuccess": "Cuenta creada con éxito",
+  "logoutSuccess": "Sesión cerrada con éxito",
+  "logoutError": "Error al cerrar sesión",
+  "loginSuccess": "Sesión iniciada con éxito"
+}

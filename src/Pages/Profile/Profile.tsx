@@ -5,8 +5,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import useProfile from "./hooks/useProfile";
 import ExhibitionList from "../../components/ExhibitionList";
+import { useTranslation } from "react-i18next";
 
 const Profile: React.FC = () => {
+  const { t } = useTranslation(["auth"]);
   const {
     user,
     selfProfile,
@@ -28,8 +30,7 @@ const Profile: React.FC = () => {
         </Typography>
         {selfProfile ? (
           <Button startIcon={<EditIcon />} onClick={handleChangeProfileType}>
-            Cambiar a perfil de{" "}
-            {user?.profile_data.is_artist ? "Visitante" : "Artista"}
+            {user?.profile_data.is_artist ? t("changeToVisitor") : t("changeToArtist")}
           </Button>
         ) : (
           ""
@@ -42,7 +43,7 @@ const Profile: React.FC = () => {
           color="grey"
           fontWeight={400}
         >
-          {user?.profile_data.is_artist ? "Artista" : "Visitante"}
+          {user?.profile_data.is_artist ? t("artist") : t("visitor")}
         </Typography>
       </Box>
       {selfProfile ? (
@@ -56,7 +57,7 @@ const Profile: React.FC = () => {
       )}
       <Box display="flex" justifyContent="space-between" sx={{ mt: 2, mb: 1 }}>
         <Typography component="div" variant="h4">
-          Exposiciones
+          {t("exhibitions", {ns: "exhibition"})}
         </Typography>
         {selfProfile && user?.profile_data.is_artist ? (
           <Button
@@ -65,7 +66,7 @@ const Profile: React.FC = () => {
             variant="contained"
             onClick={handleCreateExhibitionClick}
           >
-            Nueva Exposición
+            {t("newExhibition", {ns: "exhibition"})}
           </Button>
         ) : (
           ""

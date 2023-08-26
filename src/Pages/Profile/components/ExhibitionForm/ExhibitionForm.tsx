@@ -3,12 +3,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
 import useExhibitionForm from "./hooks/useExhibitionForm";
+import { useTranslation } from "react-i18next";
 
 interface ExhibitionForm {
   exhibition?: any;
 }
 
 const ExhibitionForm = (props: ExhibitionForm) => {
+  const {t} = useTranslation(["exhibition"])
   const { exhibition, setValue, error, handleSubmit, btnLabel } =
     useExhibitionForm(props.exhibition);
 
@@ -16,7 +18,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
     <FormControl sx={{ m: 3, width: 225 }}>
       <TextField
         size="small"
-        label="Nombre de la Exposición"
+        label={t("exhibitionName")}
         sx={{ mb: 3 }}
         value={exhibition.name}
         onChange={(e) => {
@@ -25,10 +27,10 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"name" in error}
         helperText={"name" in error ? error.name : null}
-      ></TextField>
+        ></TextField>
       <TextField
         size="small"
-        label="Temática de la Exposición"
+        label={t("exhibitionTheme")}
         sx={{ mb: 3 }}
         value={exhibition.theme}
         onChange={(e) => {
@@ -37,10 +39,10 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"theme" in error}
         helperText={"theme" in error ? error.theme : null}
-      ></TextField>
+        ></TextField>
       <TextField
         size="small"
-        label="Ancho de la Sala 3D"
+        label={t("roomWidth")}
         sx={{ mb: 3 }}
         value={exhibition.room_width}
         onChange={(e) => {
@@ -49,10 +51,10 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"room_width" in error}
         helperText={"room_width" in error ? error.room_width : null}
-      ></TextField>
+        ></TextField>
       <TextField
         size="small"
-        label="Largo de la Sala 3D"
+        label={t("roomHeight")}
         sx={{ mb: 3 }}
         value={exhibition.room_length}
         onChange={(e) => {

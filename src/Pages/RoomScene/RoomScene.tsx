@@ -44,7 +44,7 @@ const RoomScene = () => {
         <OrbitControls />
         <spotLight intensity={0.3} position={[5, 20, 20]} />
       </Canvas>
-      {userID == exhibition.artis ? <ColorPicker /> : ""}
+      {userID == exhibition.artist ? <ColorPicker /> : ""}
     </>
   );
 };

@@ -15,6 +15,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { MuiFileInput } from "mui-file-input";
 import { API_DATE_FORMAT } from "../../../../constants";
 import useIllustrationForm from "./hooks/useIllustrationForm";
+import { useTranslation } from "react-i18next";
 
 interface IllustrarionFormProps {
   id_exhibition: string;
@@ -22,6 +23,7 @@ interface IllustrarionFormProps {
 }
 
 const IllustrationForm = (props: IllustrarionFormProps) => {
+  const { t } = useTranslation(["exhibition"]);
   const { illustration, setValue, error, handleSubmit, btnLabel } =
     useIllustrationForm(props.id_exhibition, props.illustration);
 
@@ -29,7 +31,7 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
     <FormControl sx={{ m: 3 }}>
       <TextField
         size="small"
-        label="Titulo de la ilustración"
+        label={t("illustrationTitle")}
         sx={{ mb: 3 }}
         value={illustration.title}
         onChange={(e) => {
@@ -41,7 +43,7 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
       ></TextField>
       <TextField
         size="small"
-        label="Descripción de la ilustración"
+        label={t("illustrationDescription")}
         sx={{ mb: 3 }}
         value={illustration.description}
         onChange={(e) => {
@@ -55,7 +57,7 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
       <DatePicker
         disableFuture
         sx={{ mb: 3 }}
-        label="Fecha de realización"
+        label={t("datePainted")}
         value={illustration.date ? dayjs(illustration.date) : null}
         format="DD/MM/YYYY"
         onChange={(e: Dayjs | null) => {
@@ -71,9 +73,7 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
 
       <MuiFileInput
         sx={{ mb: 3 }}
-        placeholder={
-          props.illustration ? `Modificar imagen` : "Selecciona una imagen"
-        }
+        placeholder={props.illustration ? t("editImage") : t("selectImage")}
         value={illustration.image}
         onChange={(image: File | null) => {
           setValue("image", image as File);
@@ -84,7 +84,7 @@ const IllustrationForm = (props: IllustrarionFormProps) => {
       />
 
       <Button variant="contained" type="submit" onClick={handleSubmit}>
-        Crear
+        {t("create", { ns: "common" })}
       </Button>
     </FormControl>
   );

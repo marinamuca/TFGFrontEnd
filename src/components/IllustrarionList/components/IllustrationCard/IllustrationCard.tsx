@@ -10,6 +10,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useIllustrationCard from "./hooks/useIllustrationCard";
+import { useTranslation } from "react-i18next";
 
 interface IllustrationCardProps {
   illustration: any;
@@ -19,6 +20,7 @@ interface IllustrationCardProps {
 const IllustrationCard: React.FC<IllustrationCardProps> = ({
   illustration, artist
 }) => {
+  const {t} = useTranslation(['exhibition'])
   const placed = illustration.position > -1;
   const {
     handleDeleteClick,
@@ -27,6 +29,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({
     handleEditClick,
     userID,
   } = useIllustrationCard(illustration, illustration.image);
+
 
   if (responseDelete.isError) {
     console.log(responseDelete.error);
@@ -48,7 +51,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({
         />
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Ilustración
+            {t('illustration')}
           </Typography>
           <Typography variant="h5" component="div">
             {illustration.title}
@@ -58,7 +61,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({
           </Typography>
           <Typography variant="body2">{illustration.date_painted}</Typography>
           <Typography variant="body2">
-            {placed ? "Colocada en sala" : "Sin colocar"}
+            {placed ? t('illustrationPlaced') : t('illustrationNotPlaced')}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -72,7 +75,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({
             startIcon={<EditIcon />}
             onClick={handleEditClick}
           >
-            Editar
+            {t('edit', {ns: 'common'})}
           </Button>
           <Button
             size="small"
@@ -82,7 +85,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({
             startIcon={<DeleteIcon />}
             onClick={handleDeleteClick}
           >
-            Eliminar
+            {t('delete', {ns: 'common'})}
           </Button>
         </CardActions>
       ) : (

@@ -1,6 +1,6 @@
 
-import React, { useCallback, useEffect } from "react";
-import { useDeleteExhibitionMutation } from "../../../../../domain/api/apiSlice";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDeleteExhibitionMutation, useGetUserQuery, useLazyGetUserQuery } from "../../../../../domain/api/apiSlice";
 import DeleteDialog from "../../../../DeleteDialog/DeleteDialog";
 import { useAppDispatch, useAppSelector } from "../../../../../hooks/appHooks";
 import {
@@ -11,13 +11,15 @@ import {
 } from "../../../../../redux/modalSlice";
 import { selectUser, selectUserID } from "../../../../../redux/authSlice";
 import { useNavigate } from "react-router-dom";
-import { EXHIBITION_PATH } from "../../../../../constants";
+import { EXHIBITION_PATH, PROFILE_PATH } from "../../../../../constants";
 
-const useExhibitionCard = (id: string) => {
+const useExhibitionCard = (id: string, artist: string) => {
   const dispatch = useAppDispatch();
   const userID = useAppSelector(selectUserID);
   const [deleteExhibition, response] = useDeleteExhibitionMutation();
+  const {data: user , isLoading, isFetching} = useGetUserQuery(artist);
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
 
   const modalContent = (
     <DeleteDialog
@@ -38,17 +40,26 @@ const useExhibitionCard = (id: string) => {
     }
   }, [response])
 
+  useEffect(() => {
+    if(!isLoading && !isFetching)
+      setUsername(user.username)
+  }, [isLoading, isFetching])
+
   const handleDeleteClick = useCallback(() => {
     dispatch(openModal());
-    dispatch(setTitle("¿Seguro que quiere eliminar?"));
+    dispatch(setTitle("confirmDelete"));
     dispatch(setContent(modalContent))
   }, [id]);
 
   const handleExhibitionClick = useCallback(() => {
     navigate(`${EXHIBITION_PATH}/${id}`)
-  }, [])
+  }, [id])
 
-  return { handleDeleteClick, userID, handleExhibitionClick};
+  const hanldeProfileClick = useCallback(() => {
+    navigate(`${PROFILE_PATH}/${artist}`)
+  }, [artist])
+
+  return { handleDeleteClick, userID, handleExhibitionClick, hanldeProfileClick, username};
 };
 
 export default useExhibitionCard;

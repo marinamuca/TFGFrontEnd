@@ -33,7 +33,7 @@ const toastSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(login.matchFulfilled, (state) => {
       state.severity = "success";
-      state.label = "Sesión iniciada con éxito";
+      state.label = "loginSuccess";
       state.isOpen = true;
     });
     builder.addMatcher(login.matchRejected, (state, { payload }) => {
@@ -48,7 +48,7 @@ const toastSlice = createSlice({
     });
     builder.addMatcher(register.matchFulfilled, (state) => {
       state.severity = "success";
-      state.label = "Cuenta creada con éxito";
+      state.label = "registerSuccess";
       state.isOpen = true;
     });
     builder.addMatcher(register.matchRejected, (state, { payload }) => {
@@ -63,12 +63,12 @@ const toastSlice = createSlice({
     });
     builder.addMatcher(logout.matchFulfilled, (state) => {
       state.severity = "success";
-      state.label = "Sesión cerrada con éxito";
+      state.label = "logoutSuccess";
       state.isOpen = true;
     });
     builder.addMatcher(logout.matchRejected, (state) => {
       state.severity = "error";
-      state.label = "Error al cerrar sesión";
+      state.label = "logoutError";
       state.isOpen = true;
     });
   },

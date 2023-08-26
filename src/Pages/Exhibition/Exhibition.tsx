@@ -7,8 +7,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useDimensions } from "../../hooks/appHooks";
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { capitalize } from "../../constants";
 
 const Exhibition = () => {
+  const { t } = useTranslation(["exhibition"]);
   const {
     handleCreateIlustrationClick,
     isFetching,
@@ -27,6 +30,7 @@ const Exhibition = () => {
     exhibition.room_length
   );
 
+
   return (
     <Container>
       <Box display="flex" justifyContent="space-between" sx={{ mt: 2 }}>
@@ -39,7 +43,7 @@ const Exhibition = () => {
             startIcon={<EditIcon />}
             onClick={handleEditClick}
           >
-            Editar
+            {t("edit", { ns: "common" })}
           </Button>
         ) : (
           ""
@@ -52,13 +56,13 @@ const Exhibition = () => {
           color="grey"
           fontWeight={400}
         >
-          Temática: {exhibition.theme}
+          {t("theme")}: {exhibition.theme}
         </Typography>
       </Box>
       <Box display="flex" sx={{ mt: 1 }}>
         <Typography component="div" variant="subtitle1" fontWeight={400}>
-          Sala: {exhibition.room_width} x {exhibition.room_length}. Máximo{" "}
-          {maxIllustrations.max} ilustraciones
+          {t("roomInfo")}: {exhibition.room_width} x {exhibition.room_length}.{" "}
+          {t("max")} {maxIllustrations.max} {t("illustrations").toLowerCase()}.
         </Typography>
       </Box>
       <Button
@@ -68,11 +72,11 @@ const Exhibition = () => {
         href={`/room/${exhibition.id}`}
         startIcon={<VisibilityIcon />}
       >
-        Ver Sala 3D
+        {t("view3DRoom")}
       </Button>
       <Box display="flex" justifyContent="space-between" sx={{ mt: 2, mb: 1 }}>
         <Typography component="div" variant="h4">
-          Ilustraciones ({exhibition.illustrations.length}/
+          {t("illustrations")} ({exhibition.illustrations.length}/
           {maxIllustrations.max})
         </Typography>
         {userID == exhibition.artist ? (
@@ -83,14 +87,17 @@ const Exhibition = () => {
             onClick={handleCreateIlustrationClick}
             disabled={exhibition.illustrations.length >= maxIllustrations.max}
           >
-            Nueva Ilustración
+            {t("newIllustration")}
           </Button>
         ) : (
           ""
         )}
       </Box>
       <Box sx={{ maxHeight: "100% !important", overflow: "auto" }}>
-        <IllustrationList illustrations={exhibition.illustrations} artist={exhibition.artist} />
+        <IllustrationList
+          illustrations={exhibition.illustrations}
+          artist={exhibition.artist}
+        />
       </Box>
     </Container>
   );

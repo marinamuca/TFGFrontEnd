@@ -2,5 +2,8 @@
   "delete": "Eliminar",
   "edit": "Editar",
   "create": "Crear", 
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "chooseLanguage": "Idioma",
+  "es": "Español",
+  "en": "Inglés"
 }

@@ -37,7 +37,6 @@ const ExhibitionCard: React.FC<ExhibitionCardProps> = ({
     username,
   } = useExhibitionCard(exhibition.id, exhibition.artist);
 
-
   const buttonStyle = { mr: 1, ml: 1 };
   return (
     <Card variant="outlined" key={exhibition.id}>
@@ -120,7 +119,7 @@ const ExhibitionCard: React.FC<ExhibitionCardProps> = ({
             onClick={hanldeProfileClick}
             startIcon={<AccountCircleIcon />}
           >
-            {t("profile", {ns: 'auth'})}
+            {t("profile", { ns: "auth" })}
           </Button>
         ) : (
           ""

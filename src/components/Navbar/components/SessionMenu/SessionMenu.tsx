@@ -5,12 +5,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import React from "react";
-import useSession from "../hooks/useSession";
-import useMenu from "../hooks/useMenu";
+import useSession from "./hooks/useSession";
+import useMenu from "./hooks/useMenu";
 import { useTranslation } from "react-i18next";
 
 const SessionMenu: React.FC = () => {
-  const {t, i18n} = useTranslation(["auth"]);
+  const { t, i18n } = useTranslation(["auth"]);
   const { handleLogout, token, session } = useSession();
   const {
     handleLogoutClick,
@@ -39,8 +39,8 @@ const SessionMenu: React.FC = () => {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleProfileClick}>{t('profile')}</MenuItem>
-      <MenuItem onClick={handleLogoutClick}>{t('logout')}</MenuItem>
+      <MenuItem onClick={handleProfileClick}>{t("profile")}</MenuItem>
+      <MenuItem onClick={handleLogoutClick}>{t("logout")}</MenuItem>
     </Menu>
   );
 
@@ -48,13 +48,13 @@ const SessionMenu: React.FC = () => {
     if (loginPath)
       return (
         <Button color="inherit" onClick={handleRegisterClick}>
-          {t('registerLabel')}
+          {t("registerLabel")}
         </Button>
       );
     if (registerPath)
       return (
         <Button color="inherit" onClick={handleLoginClick}>
-          {t('loginLabel')}
+          {t("loginLabel")}
         </Button>
       );
   }

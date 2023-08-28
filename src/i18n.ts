@@ -1,7 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-
 // Importing translation files
 import commonES from "./locales/es/common.json";
 import authES from "./locales/es/auth.json";
@@ -32,8 +31,6 @@ const resources = {
     notifications: notificationsES
   },
 };
-
-//i18N Initialization
 
 i18n
   .use(initReactI18next)

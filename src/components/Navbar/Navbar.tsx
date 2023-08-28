@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
 import { Link } from "@mui/material";
 import SessionMenu from "./components/SessionMenu/SessionMenu";
+import LanguagePicker from "./components/LanguagePicker/LanguagePicker";
 
 export const APP_BAR_HEIGHT = 65;
 
@@ -20,6 +21,7 @@ const Navbar = () => {
             </Typography>
           </Link>
           <Box sx={{ flexGrow: 1 }} />
+          <LanguagePicker/>
           <SessionMenu />
         </Toolbar>
       </AppBar>

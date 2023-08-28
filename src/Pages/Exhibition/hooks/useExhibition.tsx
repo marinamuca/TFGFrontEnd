@@ -13,6 +13,7 @@ type params = {
 
 const useExhibitionCard = () => {
   const { id } = useParams<params>();
+  const [like, setLike] = useState(false);
   const dispatch = useAppDispatch();
   const userID = useAppSelector(selectUserID);
   const {
@@ -46,6 +47,10 @@ const useExhibitionCard = () => {
     dispatch(setContent(<ExhibitionForm exhibition={exhibition} />));
   };
 
+  const handleLikeClick = () => {
+    setLike(!like);
+  }
+
   return {
     handleCreateIlustrationClick,
     handleEditClick,
@@ -54,6 +59,8 @@ const useExhibitionCard = () => {
     isFetching,
     maxIllustrations,
     userID,
+    handleLikeClick,
+    like
   };
 };
 export default useExhibitionCard;

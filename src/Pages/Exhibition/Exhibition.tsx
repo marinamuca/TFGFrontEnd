@@ -1,5 +1,5 @@
 import IllustrationList from "../../components/IllustrarionList";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box, Container, IconButton, Paper, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import useExhibition from "./hooks/useExhibition";
 import EditIcon from "@mui/icons-material/Edit";
@@ -8,7 +8,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useDimensions } from "../../hooks/appHooks";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { capitalize } from "../../constants";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const Exhibition = () => {
   const { t } = useTranslation(["exhibition"]);
@@ -19,6 +20,8 @@ const Exhibition = () => {
     exhibition,
     handleEditClick,
     userID,
+    handleLikeClick,
+    like,
   } = useExhibition();
 
   if (isLoading || isFetching) {
@@ -29,7 +32,6 @@ const Exhibition = () => {
     exhibition.room_width,
     exhibition.room_length
   );
-
 
   return (
     <Container>
@@ -46,7 +48,9 @@ const Exhibition = () => {
             {t("edit", { ns: "common" })}
           </Button>
         ) : (
-          ""
+          <IconButton color="info" size="large" onClick={handleLikeClick}>
+            {like ? <FavoriteIcon fontSize="inherit" /> : <FavoriteBorderIcon fontSize="inherit" />}
+          </IconButton>
         )}
       </Box>
       <Box display="flex" sx={{ mt: 1 }}>

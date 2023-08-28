@@ -5,6 +5,7 @@ import modalReducer from "./redux/modalSlice";
 import colorPickerReducer from "./redux/colorPickerSlice";
 import toastSlice from "./redux/toastSlice";
 import authSlice from "./redux/authSlice";
+import i18nSlice from "./redux/i18nSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     colorPicker: colorPickerReducer,
     [toastSlice.name]: toastSlice.reducer,
     [authSlice.name]: authSlice.reducer,
+    [i18nSlice.name]: i18nSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

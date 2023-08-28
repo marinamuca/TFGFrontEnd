@@ -9,9 +9,11 @@ export const apiSlice = createApi({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
+      const lang = (getState() as RootState).i18n.language
       if (!!token) {
         headers.set("Authorization", `Token ${token}`);
       }
+      headers.set("Accept-Language", lang);
       return headers;
     },
   }),

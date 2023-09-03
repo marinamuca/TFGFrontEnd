@@ -10,7 +10,7 @@ interface ExhibitionForm {
 }
 
 const ExhibitionForm = (props: ExhibitionForm) => {
-  const {t} = useTranslation(["exhibition"])
+  const { t } = useTranslation(["models"]);
   const { exhibition, setValue, error, handleSubmit, btnLabel } =
     useExhibitionForm(props.exhibition);
 
@@ -27,7 +27,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"name" in error}
         helperText={"name" in error ? error.name : null}
-        ></TextField>
+      ></TextField>
       <TextField
         size="small"
         label={t("exhibitionTheme")}
@@ -39,7 +39,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"theme" in error}
         helperText={"theme" in error ? error.theme : null}
-        ></TextField>
+      ></TextField>
       <TextField
         size="small"
         label={t("roomWidth")}
@@ -51,7 +51,7 @@ const ExhibitionForm = (props: ExhibitionForm) => {
         fullWidth
         error={"room_width" in error}
         helperText={"room_width" in error ? error.room_width : null}
-        ></TextField>
+      ></TextField>
       <TextField
         size="small"
         label={t("roomHeight")}

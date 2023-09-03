@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useChangeProfileMutation,
-  useLazyGetUserProfileQuery,
+  useLazyGetLikedExhibitionsQuery,
   useLazyGetUserQuery,
 } from "../../../domain/api/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/appHooks";
@@ -26,9 +26,10 @@ const useProfile = () => {
   const currentUser = useAppSelector(selectUser);
   const modalContentNewExibition = <ExhibitionForm />;
   const [changeProfile, changeResponse] = useChangeProfileMutation();
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(currentUser);
   const [selfProfile, setSelfProfile] = useState(false);
+  const [getLiked, { data: liked, isSuccess: isSuccessLiked }] = useLazyGetLikedExhibitionsQuery();
 
   const [getUser, { data, isFetching, isSuccess: isSuccessUser }] =
     useLazyGetUserQuery();
@@ -36,9 +37,9 @@ const useProfile = () => {
   useEffect(() => {
     if (id) {
       getUser(id);
-      setSelfProfile(false)
+      setSelfProfile(false);
     } else {
-      setSelfProfile(true)
+      setSelfProfile(true);
       getUser(currentUser?.id);
     }
   }, [id]);
@@ -46,9 +47,20 @@ const useProfile = () => {
   useEffect(() => {
     if (isSuccessUser) {
       setUser(data);
-      setIsLoading(false);
+
+      if (!user?.profile_data.is_artist) {
+        getLiked({});
+      } else {
+        setIsLoading(false);
+      }
     }
   }, [data]);
+
+  useEffect(() => {
+    if(isSuccessLiked){
+      setIsLoading(false)
+    }
+  }, [liked])
 
   const handleCreateExhibitionClick = () => {
     console.log(user);
@@ -58,7 +70,7 @@ const useProfile = () => {
   };
 
   const handleChangeProfileType = useCallback(() => {
-    console.log(user)
+    console.log(user);
     dispatch(openModal());
     dispatch(setTitle("changeProfile"));
     dispatch(
@@ -85,6 +97,7 @@ const useProfile = () => {
     isFetching,
     handleCreateExhibitionClick,
     handleChangeProfileType,
+    liked,
   };
 };
 

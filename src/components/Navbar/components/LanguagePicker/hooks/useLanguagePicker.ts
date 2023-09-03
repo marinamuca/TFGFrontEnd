@@ -28,7 +28,6 @@ const useLanguagePicker = () => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-    // location.reload();
   }, [language]);
 
   return {

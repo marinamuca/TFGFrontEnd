@@ -1,5 +1,12 @@
 import IllustrationList from "../../components/IllustrarionList";
-import { Box, Container, IconButton, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  IconButton,
+  makeStyles,
+  Paper,
+  Typography,
+} from "@mui/material";
 import Button from "@mui/material/Button";
 import useExhibition from "./hooks/useExhibition";
 import EditIcon from "@mui/icons-material/Edit";
@@ -7,15 +14,14 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useDimensions } from "../../hooks/appHooks";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useTranslation } from "react-i18next";
 
 const Exhibition = () => {
-  const { t } = useTranslation(["exhibition"]);
+  const { t } = useTranslation(["models"]);
   const {
     handleCreateIlustrationClick,
-    isFetching,
     isLoading,
     exhibition,
     handleEditClick,
@@ -24,7 +30,7 @@ const Exhibition = () => {
     like,
   } = useExhibition();
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -49,7 +55,11 @@ const Exhibition = () => {
           </Button>
         ) : (
           <IconButton color="info" size="large" onClick={handleLikeClick}>
-            {like ? <FavoriteIcon fontSize="inherit" /> : <FavoriteBorderIcon fontSize="inherit" />}
+            {like.has_like ? (
+              <FavoriteIcon fontSize="inherit" />
+            ) : (
+              <FavoriteBorderIcon fontSize="inherit" />
+            )}
           </IconButton>
         )}
       </Box>
@@ -66,7 +76,7 @@ const Exhibition = () => {
       <Box display="flex" sx={{ mt: 1 }}>
         <Typography component="div" variant="subtitle1" fontWeight={400}>
           {t("roomInfo")}: {exhibition.room_width} x {exhibition.room_length}.{" "}
-          {t("max")} {maxIllustrations.max} {t("illustrations").toLowerCase()}.
+          {t("max", { max: maxIllustrations.max })}.
         </Typography>
       </Box>
       <Button

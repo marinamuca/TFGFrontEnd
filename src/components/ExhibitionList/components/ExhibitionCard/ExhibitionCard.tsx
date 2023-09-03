@@ -24,7 +24,7 @@ const ExhibitionCard: React.FC<ExhibitionCardProps> = ({
   exhibition,
   home,
 }) => {
-  const { t } = useTranslation(["exhibition"]);
+  const { t } = useTranslation(["models"]);
   const maxIllustrations = useDimensions(
     exhibition.room_width,
     exhibition.room_length

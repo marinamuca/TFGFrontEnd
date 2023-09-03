@@ -17,7 +17,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     return (
       <div className="App">
         <AppModal />
-        <InfoToast/>
+        <InfoToast />
         <Navbar />
         {children}
       </div>
@@ -27,11 +27,8 @@ const Layout: React.FC<Props> = ({ children }) => {
     <div className="App">
       <AppModal />
       <Navbar />
-      <InfoToast/>
-      <Container
-        fixed
-        maxWidth="md"
-      >
+      <InfoToast />
+      <Container fixed maxWidth="md">
         <Box sx={{ m: 1 }}>{children}</Box>
       </Container>
     </div>

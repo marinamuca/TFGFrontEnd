@@ -9,7 +9,7 @@ export const apiSlice = createApi({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
-      const lang = (getState() as RootState).i18n.language
+      const lang = (getState() as RootState).i18n.language;
       if (!!token) {
         headers.set("Authorization", `Token ${token}`);
       }
@@ -106,6 +106,31 @@ export const apiSlice = createApi({
         method: "GET",
       }),
     }),
+    checkLike: builder.query({
+      query: (exhibition_id) => ({
+        url: `check_like/${exhibition_id}/`,
+        method: "GET",
+      }),
+    }),
+    sendLike: builder.mutation({
+      query: (body) => ({
+        url: `likes/`,
+        method: "POST",
+        body,
+      }),
+    }),
+    deleteLike: builder.mutation({
+      query: (id) => ({
+        url: `likes/${id}/`,
+        method: "DELETE",
+      }),
+    }),
+    getLikedExhibitions: builder.query({
+      query: () => ({
+        url: `liked_exhibitions/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -127,5 +152,9 @@ export const {
   useChangeProfileMutation,
   useLazyGetUserQuery,
   useGetUserQuery,
-  useLazyGetUserProfileQuery
+  useLazyGetUserProfileQuery,
+  useLazyCheckLikeQuery,
+  useSendLikeMutation,
+  useDeleteLikeMutation,
+  useLazyGetLikedExhibitionsQuery
 } = apiSlice;

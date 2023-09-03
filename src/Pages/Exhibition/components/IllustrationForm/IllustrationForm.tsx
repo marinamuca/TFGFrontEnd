@@ -2,14 +2,6 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FormControl } from "@mui/material";
-import {
-  useCreateIllustrationMutation,
-  useUpdateIllustrationMutation,
-} from "../../../../domain/api/apiSlice";
-import {
-  IllustrationErrorData,
-  IllustrationInput,
-} from "../../../../domain/types/types";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { MuiFileInput } from "mui-file-input";
@@ -23,7 +15,7 @@ interface IllustrarionFormProps {
 }
 
 const IllustrationForm = (props: IllustrarionFormProps) => {
-  const { t } = useTranslation(["exhibition"]);
+  const { t } = useTranslation(["models"]);
   const { illustration, setValue, error, handleSubmit, btnLabel } =
     useIllustrationForm(props.id_exhibition, props.illustration);
 

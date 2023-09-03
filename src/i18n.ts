@@ -6,8 +6,8 @@ import commonES from "./locales/es/common.json";
 import authES from "./locales/es/auth.json";
 import commonEN from "./locales/en/common.json";
 import authEN from "./locales/en/auth.json";
-import exhibitionEN from "./locales/en/exhibition.json";
-import exhibitionES from "./locales/es/exhibition.json";
+import modelsEN from "./locales/en/models.json";
+import modelsES from "./locales/es/models.json";
 import modalES from "./locales/es/modal.json";
 import modalEN from "./locales/en/modal.json";
 import notificationsES from "./locales/es/notifications.json";
@@ -19,14 +19,14 @@ const resources = {
   en: {
     common: commonEN,
     auth: authEN,
-    exhibition: exhibitionEN,
+    models: modelsEN,
     modal: modalEN,
     notifications: notificationsEN
   },
   es: {
     common: commonES,
     auth: authES,
-    exhibition: exhibitionES,
+    models: modelsES,
     modal: modalES,
     notifications: notificationsES
   },
